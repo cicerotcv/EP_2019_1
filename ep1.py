@@ -40,71 +40,71 @@ def carregar_cenarios():
             }
         },
         "salas indiviuais": {
-        	"titulo":"Silêncio, por favor",
-        	"descricao":"Voce precisa encontrar amigos que te ajudem a resolver a EP"
-        				"Tome cuidado para não entrar em uma sala que está ocupada por um veterano",
-        	"opcoes": {
-        		"biblioteca":"Voltar para a entrada da biblioteca",
-        		"sala 01":"Entrar na sala 01",
-        		"sala 02":"Entrar na sala 02",
-        		"investigar": "Procurar itens no cenario"		
-        	}
+            "titulo":"Silêncio, por favor",
+            "descricao":"Voce precisa encontrar amigos que te ajudem a resolver a EP"
+                        "Tome cuidado para não entrar em uma sala que está ocupada por um veterano",
+            "opcoes": {
+                "biblioteca":"Voltar para a entrada da biblioteca",
+                "sala 01":"Entrar na sala 01",
+                "sala 02":"Entrar na sala 02",
+                "investigar": "Procurar itens no cenario"        
+            }
         },
         "sala 01": {
-        	"titulo":"Sala de estudos 1",
-        	"descricao":"Essa sala esta vazia.",
-        	"opcoes": {
-        		"salas individuais":"voltar para o corredor das salas individuais",
-        		"investigar":"Procurar itens no cenario"
-        	}
+            "titulo":"Sala de estudos 1",
+            "descricao":"Essa sala esta vazia.",
+            "opcoes": {
+                "salas individuais":"voltar para o corredor das salas individuais",
+                "investigar":"Procurar itens no cenario"
+            }
         },
         "sala 02": {
-        	"titulo":"Sala de estudos 2",
-        	"descricao":"Essa sala esta cheia de veteranos enfurecidos por conta reprovacao!",
-        	"opcoes": {
-        		"salas individuais":"voltar para o corredor das salas individuais",
-                "conversar":"interagir com as pessoas do cenario"
-        		"investigar":"Procurar itens no cenario"
-        	}
-    	}
+            "titulo":"Sala de estudos 2",
+            "descricao":"Essa sala esta cheia de veteranos enfurecidos por conta reprovacao!",
+            "opcoes": {
+                "salas individuais":"voltar para o corredor das salas individuais",
+                "conversar":"interagir com as pessoas do cenario",
+                "investigar":"Procurar itens no cenario"
+            }
+        }
     }
-  	nome_cenario_atual = "inicio"
+    nome_cenario_atual = "inicio"
     return cenarios, nome_cenario_atual
 
 def monstros():
-	monstros = {
-	"monstro1": {
-		"descricao": "descrição do monstro 1 aqui",
-		"dificuldade": 1,
-		"status":{"vida":100, "agilidade":100},
-		"opcoes":{
-			"ignorar":"você irá ignorar o monstro",
-			"fugir": "você irá empurrar o monstro e correr para o cenário anterior"}},
-	
-	"monstro2": {
-		"descricao": "descrição do monstro 1 aqui",
-		"dificuldade": 1,
-		"status":{"vida":100, "agilidade":100},
-		"opcoes":{
-			"ignorar":"você irá ignorar o monstro",
-			"fugir": "você irá empurrar o monstro e correr para o cenário anterior"}},
-	
-	"monstro3": {
-		"descricao": "descrição do monstro 1 aqui",
-		"dificuldade": 1,
-		"status":{"vida":100, "agilidade":100},
-		"opcoes":{
-			"ignorar":"você irá ignorar o monstro",
-			"fugir": "você irá empurrar o monstro e correr para o cenário anterior"}},
-	
-	"monstro4": {
-		"descricao": "descrição do monstro 1 aqui",
-		"dificuldade": 1,
-		"status":{"vida":100, "agilidade":100},
-		"opcoes":{
-			"ignorar":"você irá ignorar o monstro",
-			"fugir": "você irá empurrar o monstro e correr para o cenário anterior"}}
-				}
+    monstros = {
+    "monstro1": {
+        "descricao": "descrição do monstro 1 aqui",
+        "dificuldade": 1,
+        "status":{"vida":100, "agilidade":100},
+        "opcoes":{
+            "ignorar":"você irá ignorar o monstro",
+            "fugir": "você irá empurrar o monstro e correr para o cenário anterior"}},
+    
+    "monstro2": {
+        "descricao": "descrição do monstro 1 aqui",
+        "dificuldade": 1,
+        "status":{"vida":100, "agilidade":100},
+        "opcoes":{
+            "ignorar":"você irá ignorar o monstro",
+            "fugir": "você irá empurrar o monstro e correr para o cenário anterior"}},
+    
+    "monstro3": {
+        "descricao": "descrição do monstro 1 aqui",
+        "dificuldade": 1,
+        "status":{"vida":100, "agilidade":100},
+        "opcoes":{
+            "ignorar":"você irá ignorar o monstro",
+            "fugir": "você irá empurrar o monstro e correr para o cenário anterior"}},
+    
+    "monstro4": {
+        "descricao": "descrição do monstro 1 aqui",
+        "dificuldade": 1,
+        "status":{"vida":100, "agilidade":100},
+        "opcoes":{
+            "ignorar":"você irá ignorar o monstro",
+            "fugir": "você irá empurrar o monstro e correr para o cenário anterior"}}
+                }
 
 
 def main():
@@ -132,7 +132,8 @@ def main():
             print("Acabaram-se suas opções! Mwo mwo mwooooo...")
             game_over = True
         else:
-        	print('O que você vai fazer?')
+            print(cenario_atual['titulo'])
+            print(cenario_atual['descricao'])
             print("")
             for opcao in opcoes:
                 print('{0}:{1}'.format(opcao,opcoes[opcao]))
