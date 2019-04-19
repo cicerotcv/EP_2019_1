@@ -34,11 +34,18 @@ def carregar_cenarios():
             "descricao": "Voce esta na biblioteca",
             "opcoes": {
                 "inicio": "Voltar para o saguao de entrada"
+                "salas individuais": "Procurar colegas para ajudar na EP"
+                "Pesquisar por Acervo": "Procurar livros que possam ajudar"
             }
         }
     }
-    nome_cenario_atual = "inicio"
+  
     return cenarios, nome_cenario_atual
+
+def mochila(): {
+	"Caderno":
+
+}
 
 
 def main():
@@ -67,12 +74,10 @@ def main():
             game_over = True
         else:
         	print('O que você vai fazer?')
-            print()
+            print("")
             for opcao in opcoes:
                 print('{0}:{1}'.format(opcao,opcoes[opcao]))
             escolha = input()
-            escolha = ""
-
             if escolha in opcoes:
                 nome_cenario_atual = escolha
             else:
