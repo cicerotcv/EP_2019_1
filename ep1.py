@@ -1,9 +1,29 @@
+# -*- coding: utf-8 -*-
 # EP 2019-1: Escape Insper
 #
 # Alunos: 
 # - aluno A: Cicero Tiago Carneiro Valentim, cicerotcv@al.insper.edu.br
 # - aluno B: Luiz Felipe Lazzaron, luizfl@al.insper.edu.br
 
+"""
+Em nosso código, temos várias funções de jogo:
+    - Função exploração ==> função em que o personagem caminha sobre os cenário
+        ==> carregar_cenarios()
+    - Função combate ==> função em que o personagem luta com monstros
+        ==> carregar_combate():
+    - Função investigação ==> função em que o personagem investiga o ambiente,
+        achando itens ==> carregar_investigação()
+    - Função inventário ==> função em que o personagem procura em sua mochila
+        itens que ele foi conseguindo por meio da investigação
+        ==> carregar_inventario()
+"""
+
+#Parâmetros do Jogador
+forca = 1000
+agilidade = 1000
+vida = 1000
+
+#FUNÇÃO EXPLORAÇÃO
 def carregar_cenarios():
     cenarios = {
         "inicio": {
@@ -11,7 +31,9 @@ def carregar_cenarios():
             "descricao": "Voce esta no saguao de entrada do insper",
             "opcoes": {
                 "andar professor": "Tomar o elevador para o andar do professor",
-                "biblioteca": "Ir para a entrada da biblioteca"
+                "biblioteca": "Ir para a entrada da biblioteca",
+                "conversar":"interagir com as pessoas do cenario",
+                "investigar":"Procurar itens no cenario"
             }
         },
         "andar professor": {
@@ -39,7 +61,7 @@ def carregar_cenarios():
                 "investigar": "Procurar itens no cenario"
             }
         },
-        "salas indiviuais": {
+        "salas individuais": {
             "titulo":"Silêncio, por favor",
             "descricao":"Voce precisa encontrar amigos que te ajudem a resolver a EP"
                         "Tome cuidado para não entrar em uma sala que está ocupada por um veterano",
@@ -64,13 +86,23 @@ def carregar_cenarios():
             "opcoes": {
                 "salas individuais":"voltar para o corredor das salas individuais",
                 "conversar":"interagir com as pessoas do cenario",
-                "investigar":"Procurar itens no cenario"
-            }
+                "investigar":"Procurar itens no cenario"}
+            "monstros": {"monstro1": {
+                            "descricao": "descrição do monstro 1 aqui",
+                            "dificuldade": 1,
+                            "status":{"vida":100, "agilidade":100,"força":100},
+                            "opcoes":{
+                                    "atacar":"você irá atacar o monstro",
+                                    "fugir": "você irá empurrar o monstro e correr para o cenário anterior"}}
+                    }
+        
         }
     }
     nome_cenario_atual = "inicio"
     return cenarios, nome_cenario_atual
 
+
+    
 def monstros():
     monstros = {
     "monstro1": {
@@ -106,8 +138,9 @@ def monstros():
             "fugir": "você irá empurrar o monstro e correr para o cenário anterior"}}
                 }
 
-
+# Função Principal
 def main():
+    #Introdução do Jogo
     print("Na hora do sufoco!")
     print("------------------")
     print()
@@ -118,19 +151,26 @@ def main():
         "na entrada do Insper, e quer procurar o professor para pedir um "
         "adiamento do EP (boa sorte...)")
     print()
-
+    #Carregamento dos Cenários e do Início
     cenarios, nome_cenario_atual = carregar_cenarios()
-
+    #Condição para o Game Over
     game_over = False
+    #Enquanto não for Game Over
     while not game_over:
+        # Recebendo Inicio como cenario atual
         cenario_atual = cenarios[nome_cenario_atual]
-
-        print(nome_cenario_atual,"\n{}".format("-"*len(nome_cenario_atual)))
         
+        
+        
+        
+        
+        
+        print(nome_cenario_atual,"\n{}".format("-"*len(nome_cenario_atual)))
         opcoes = cenario_atual['opcoes']
         if len(opcoes) == 0:
             print("Acabaram-se suas opções! Mwo mwo mwooooo...")
             game_over = True
+        
         else:
             print(cenario_atual['titulo'])
             print(cenario_atual['descricao'])
