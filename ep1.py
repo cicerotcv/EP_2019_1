@@ -36,7 +36,7 @@ def carregar_cenarios():
                 "inicio": "Voltar para o saguao de entrada",
                 "salas individuais": "Procurar colegas para ajudar na EP",
                 "pesquisar no acervo": "Procurar livros que possam ajudar na EP",
-                "investigar": "Procurar itens no cenario atual"
+                "investigar": "Procurar itens no cenario"
             }
         },
         "salas indiviuais": {
@@ -46,8 +46,8 @@ def carregar_cenarios():
         	"opcoes": {
         		"biblioteca":"Voltar para a entrada da biblioteca",
         		"sala 01":"Entrar na sala 01",
-        		"sala 02":"Entrar na sala 01",
-        		"investigar": "Procurar itens no cenario atual"		
+        		"sala 02":"Entrar na sala 02",
+        		"investigar": "Procurar itens no cenario"		
         	}
         },
         "sala 01": {
@@ -55,17 +55,17 @@ def carregar_cenarios():
         	"descricao":"Essa sala esta vazia.",
         	"opcoes": {
         		"salas individuais":"voltar para o corredor das salas individuais",
-        		"Investigar":"Procurar itens no cenario atual"
+        		"investigar":"Procurar itens no cenario"
         	}
         },
         "sala 02": {
         	"titulo":"Sala de estudos 2",
-        	"descricao":"Essa sala esta cheia de veteranos reprovados enfurecidos!",
+        	"descricao":"Essa sala esta cheia de veteranos enfurecidos por conta reprovacao!",
         	"opcoes": {
         		"salas individuais":"voltar para o corredor das salas individuais",
-        		"Investigar":"Procurar itens no cenario atual"
+                "conversar":"interagir com as pessoas do cenario"
+        		"investigar":"Procurar itens no cenario"
         	}
-
     	}
     }
   	nome_cenario_atual = "inicio"
@@ -105,12 +105,6 @@ def monstros():
 			"ignorar":"você irá ignorar o monstro",
 			"fugir": "você irá empurrar o monstro e correr para o cenário anterior"}}
 				}
-
-
-def mochila(): {
-	"Caderno":
-
-}
 
 
 def main():
