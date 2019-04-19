@@ -17,6 +17,7 @@ Em nosso código, temos várias funções de jogo:
         itens que ele foi conseguindo por meio da investigação
         ==> carregar_inventario()
 """
+nome = input("Bem-vindo, jogador! Qual é o seu nome? ")
 
 #Parâmetros do Jogador
 forca = 100
@@ -28,13 +29,14 @@ def carregar_cenarios():
     cenarios = {
         "inicio": {
             "titulo": "Saguao do perigo.",
-            "descricao": "Voce esta no saguao de entrada do insper.",
+            "descricao": "Voce esta no saguao de entrada do insper. ",
             "opcoes": {
                 "andar professor": "Tomar o elevador para o andar do professor",
                 "biblioteca": "Ir para a entrada da biblioteca",
                 "conversar":"interagir com as pessoas do cenario",
                 "investigar":"Procurar itens no cenario"},
             "monstros": {}},
+            "investigar": "Não há nada aqui.",
         
         "andar professor": {
             "titulo": "Andar do desespero.",
@@ -138,10 +140,10 @@ def NPCs():
     "Hagemoto": {
         "descricao": "Nunca foi visto.",
         "dificuldade": 99999,
-        "status":{"vida": 100, "ataque":100, "defesa": 100},
+        "status":{"vida": 999, "ataque": 999, "defesa": 999},
         "opcoes":{
             "ignorar":"você irá ignorar o monstro",
-            "fugir": "você irá empurrar o monstro e correr para o cenário anterior"}},
+            "interagir": "você irá falar com ele"}},
 
     "Aluno dormindo no chão":{
             "descricao": "Aluno dormindo próximo ao livro 'Think Python'.",
@@ -153,11 +155,24 @@ def NPCs():
 
 
 def mochila(): {
-    "Caderno":{"descricao":"Seu caderno de anotações",
-               "anotações":"exibe suas anotações"}
+    "Caderno":"anotações"
     }
     
-
+def investigar():
+        locais = {
+        "inicio": {
+                "observar":"não há nada aqui",
+                "pegar":"não há nada para pegar",
+                "andar":"Você pode ir para a biblioteca ou para o andar do professor"},
+        "biblioteca":{
+                "observar":{
+                        "Pessoas":["Aluno dormindo no chão","Bibliotecaria"],
+                        "Objetos":["livros"]},
+                "itens visíveis":["Think Python",""]},
+        "andar do professor": {
+                "observar":"não há quase nada aqui"},
+        
+        }
 # Função Principal
 def main():
     #Introdução do Jogo
@@ -179,6 +194,7 @@ def main():
       
         print(nome_cenario_atual,"\n{}\n".format("-"*len(nome_cenario_atual)))
         print(cenarios[nome_cenario_atual]["descricao"])
+       
         opcoes = cenario_atual['opcoes']
         
         if len(opcoes) == 0:
@@ -189,7 +205,7 @@ def main():
             print(cenario_atual['titulo'])
             print("")
             for opcao in opcoes:
-                print('{0}:{1}'.format(opcao,opcoes[opcao]))
+                print('{0}: {1}'.format(opcao,opcoes[opcao]))
             escolha = input("O que você vai fazer? ")
             if escolha in opcoes:
                 nome_cenario_atual = escolha
