@@ -68,8 +68,49 @@ def carregar_cenarios():
 
     	}
     }
-  
+  	nome_cenario_atual = "inicio"
     return cenarios, nome_cenario_atual
+
+def monstros():
+	monstros = {
+	"monstro1": {
+		"descricao": "descrição do monstro 1 aqui",
+		"dificuldade": 1,
+		"status":{"vida":100, "agilidade":100},
+		"opcoes":{
+			"ignorar":"você irá ignorar o monstro",
+			"fugir": "você irá empurrar o monstro e correr para o cenário anterior"}},
+	
+	"monstro2": {
+		"descricao": "descrição do monstro 1 aqui",
+		"dificuldade": 1,
+		"status":{"vida":100, "agilidade":100},
+		"opcoes":{
+			"ignorar":"você irá ignorar o monstro",
+			"fugir": "você irá empurrar o monstro e correr para o cenário anterior"}},
+	
+	"monstro3": {
+		"descricao": "descrição do monstro 1 aqui",
+		"dificuldade": 1,
+		"status":{"vida":100, "agilidade":100},
+		"opcoes":{
+			"ignorar":"você irá ignorar o monstro",
+			"fugir": "você irá empurrar o monstro e correr para o cenário anterior"}},
+	
+	"monstro4": {
+		"descricao": "descrição do monstro 1 aqui",
+		"dificuldade": 1,
+		"status":{"vida":100, "agilidade":100},
+		"opcoes":{
+			"ignorar":"você irá ignorar o monstro",
+			"fugir": "você irá empurrar o monstro e correr para o cenário anterior"}}
+				}
+
+
+def mochila(): {
+	"Caderno":
+
+}
 
 
 def main():
