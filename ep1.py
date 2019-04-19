@@ -2,7 +2,7 @@
 #
 # Alunos: 
 # - aluno A: Cicero Tiago Carneiro Valentim, cicerotcv@al.insper.edu.br
-# - aluno B: Sicrano de Almeida, sicranoa1@insper.edu.br
+# - aluno B: Luiz Felipe Lazzaron, luizfl@al.insper.edu.br
 
 def carregar_cenarios():
     cenarios = {
@@ -66,9 +66,11 @@ def main():
             print("Acabaram-se suas opções! Mwo mwo mwooooo...")
             game_over = True
         else:
-
-            # Aluno B: substitua este comentário e a linha abaixo pelo código
-            # para pedir a escolha do usuário.
+        	print('O que você vai fazer?')
+            print()
+            for opcao in opcoes:
+                print('{0}:{1}'.format(opcao,opcoes[opcao]))
+            escolha = input()
             escolha = ""
 
             if escolha in opcoes:
