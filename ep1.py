@@ -7,25 +7,25 @@
 def carregar_cenarios():
     cenarios = {
         "inicio": {
-            "titulo": "Saguao do perigo",
-            "descricao": "Voce esta no saguao de entrada do insper",
+            "titulo": "Saguao do perigo.",
+            "descricao": "Voce esta no saguao de entrada do insper.",
             "opcoes": {
-                "andar professor": "Tomar o elevador para o andar do professor",
-                "biblioteca": "Ir para a entrada da biblioteca"
+                "andar professor": "Tomar o elevador para o andar do professor.",
+                "biblioteca": "Ir para a entrada da biblioteca."
             }
         },
         "andar professor": {
-            "titulo": "Andar do desespero",
-            "descricao": "Voce chegou ao andar da sala do seu professor",
+            "titulo": "Andar do desespero.",
+            "descricao": "Voce chegou ao andar da sala do seu professor.",
             "opcoes": {
-                "inicio": "Tomar o elevador para o saguao de entrada",
-                "professor": "Falar com o professor"
+                "inicio": "Tomar o elevador para o saguao de entrada.",
+                "professor": "Falar com o professor."
             }
         },
         "professor": {
-            "titulo": "O monstro do Python",
-            "descricao": "Voce foi pedir para o professor adiar o EP. "
-                         "O professor revelou que é um monstro disfarçado "
+            "titulo": "O monstro do Python.",
+            "descricao": "Voce foi pedir para o professor adiar o EP."
+                         "O professor revelou que é um monstro disfarçado."
                          "e devorou sua alma.",
             "opcoes": {}
         },
@@ -40,90 +40,102 @@ def carregar_cenarios():
             }
         },
         "salas indiviuais": {
-        	"titulo":"Silêncio, por favor",
-        	"descricao":"Voce precisa encontrar amigos que te ajudem a resolver a EP"
-        				"Tome cuidado para não entrar em uma sala que está ocupada por um veterano",
-        	"opcoes": {
-        		"biblioteca":"Voltar para a entrada da biblioteca",
-        		"sala 01":"Entrar na sala 01",
-        		"sala 02":"Entrar na sala 01",
-        		"investigar": "Procurar itens no cenario atual"		
-        	}
+            "titulo":"Silêncio, por favor",
+            "descricao":"Voce precisa encontrar amigos que te ajudem a resolver a EP"
+                        "Tome cuidado para não entrar em uma sala que está ocupada por um veterano",
+            "opcoes": {
+                "biblioteca":"Voltar para a entrada da biblioteca",
+                "sala 01":"Entrar na sala 01",
+                "sala 02":"Entrar na sala 01",
+                "investigar": "Procurar itens no cenario atual"        
+            }
         },
         "sala 01": {
-        	"titulo":"Sala de estudos 1",
-        	"descricao":"Essa sala esta vazia.",
-        	"opcoes": {
-        		"salas individuais":"voltar para o corredor das salas individuais",
-        		"Investigar":"Procurar itens no cenario atual"
-        	}
+            "titulo":"Sala de estudos 1",
+            "descricao":"Essa sala esta vazia.",
+            "opcoes": {
+                "salas individuais":"voltar para o corredor das salas individuais",
+                "Investigar":"Procurar itens no cenario atual"
+            }
         },
         "sala 02": {
-        	"titulo":"Sala de estudos 2",
-        	"descricao":"Essa sala esta cheia de veteranos reprovados enfurecidos!",
-        	"opcoes": {
-        		"salas individuais":"voltar para o corredor das salas individuais",
-        		"Investigar":"Procurar itens no cenario atual"
-        	}
+            "titulo":"Sala de estudos 2",
+            "descricao":"Essa sala esta cheia de veteranos reprovados enfurecidos!",
+            "opcoes": {
+                "salas individuais":"voltar para o corredor das salas individuais",
+            "Investigar":"Procurar itens no cenario atual"
+                }
 
-    	}
+        }
     }
-  	nome_cenario_atual = "inicio"
+    nome_cenario_atual = "inicio"
     return cenarios, nome_cenario_atual
 
-def monstros():
-	monstros = {
-	"monstro1": {
-		"descricao": "descrição do monstro 1 aqui",
-		"dificuldade": 1,
-		"status":{"vida":100, "agilidade":100},
-		"opcoes":{
-			"ignorar":"você irá ignorar o monstro",
-			"fugir": "você irá empurrar o monstro e correr para o cenário anterior"}},
-	
-	"monstro2": {
-		"descricao": "descrição do monstro 1 aqui",
-		"dificuldade": 1,
-		"status":{"vida":100, "agilidade":100},
-		"opcoes":{
-			"ignorar":"você irá ignorar o monstro",
-			"fugir": "você irá empurrar o monstro e correr para o cenário anterior"}},
-	
-	"monstro3": {
-		"descricao": "descrição do monstro 1 aqui",
-		"dificuldade": 1,
-		"status":{"vida":100, "agilidade":100},
-		"opcoes":{
-			"ignorar":"você irá ignorar o monstro",
-			"fugir": "você irá empurrar o monstro e correr para o cenário anterior"}},
-	
-	"monstro4": {
-		"descricao": "descrição do monstro 1 aqui",
-		"dificuldade": 1,
-		"status":{"vida":100, "agilidade":100},
-		"opcoes":{
-			"ignorar":"você irá ignorar o monstro",
-			"fugir": "você irá empurrar o monstro e correr para o cenário anterior"}}
-				}
+def NPCs():
+    inimigos = {
+    "Professor": {
+        "descricao": "O Monstro do Python",
+        "dificuldade": 200,
+        "status":{"vida": 1000, "ataque":100, "defesa": 50},
+        "opcoes":{
+            "ignorar":"você irá ignorar o monstro",
+            "fugir": "você irá empurrar o monstro e correr para o cenário anterior"}},
+    
+    "Hagemoto": {
+        "descricao": "descrição do monstro 1 aqui",
+        "dificuldade": 1,
+        "status":{"vida": 100, "ataque":100, "defesa": 100},
+        "opcoes":{
+            "ignorar":"você irá ignorar o monstro",
+            "fugir": "você irá empurrar o monstro e correr para o cenário anterior"}},
+    
+    "Johanes Sebatians Hashi": {
+        "descricao": "descrição do monstro 1 aqui.",
+        "dificuldade": 1,
+        "status":{"vida": 100, "ataque":100, "defesa": 100},
+        "opcoes":{
+            "ignorar":"você irá ignorar o monstro.",
+            "fugir": "você irá empurrar o monstro e correr para o cenário anterior."}},
+    
+    "Veterano Enfurecido": {
+        "descricao": "descrição do monstro 1 aqui.",
+        "dificuldade": 1,
+        "status":{"vida": 100, "ataque":100, "defesa": 100},
+        "opcoes":{
+            "ignorar":"você irá ignorar o monstro.",
+            "fugir": "você irá empurrar o monstro e correr para o cenário anterior."}}
+                }
+    outros = {
+    "Bibliotecaria": {
+            "descricao": "Encontra-se ociosa olhando atentamente para o acervo de livros.",
+            "dificuldade": 99999999,
+            "status":{"vida": 100, "ataque":100, "defesa": 100},
+            "opcoes":{
+                    }
+            },
+    "Aluno dormindo no chão":{
+            "descricao": "Aluno dormindo próximo ao livro 'Think Python'.",
+            "dificuldade": 99999999,
+            "status":{"vida": 100, "ataque":100, "defesa": 100},
+            "opcoes":{
+                    }
+            }}
+    return inimigos,outros
 
 
 def mochila(): {
-	"Caderno":
-
-}
-
-
+    "Caderno":{"descricao":"Seu caderno de anotações",
+               "anotações":"exibe suas anotações"}
+    }
+    
 def main():
     print("Na hora do sufoco!")
     print("------------------")
-    print()
     print("Parecia uma boa idéia: vou só jogar um pouquinho/assistir Netflix/"
         "embaçar em geral. Amanhã eu começo o EP. Mas isso não deu certo...")
-    print()
     print("É o dia de entregar o EP e você está muuuuito atrasado! Você está "
         "na entrada do Insper, e quer procurar o professor para pedir um "
         "adiamento do EP (boa sorte...)")
-    print()
 
     cenarios, nome_cenario_atual = carregar_cenarios()
 
@@ -138,7 +150,7 @@ def main():
             print("Acabaram-se suas opções! Mwo mwo mwooooo...")
             game_over = True
         else:
-        	print('O que você vai fazer?')
+            print('O que você vai fazer?')
             print("")
             for opcao in opcoes:
                 print('{0}:{1}'.format(opcao,opcoes[opcao]))
