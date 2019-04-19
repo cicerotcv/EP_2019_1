@@ -11,7 +11,7 @@ def carregar_cenarios():
             "descricao": "Voce esta no saguao de entrada do insper",
             "opcoes": {
                 "andar professor": "Tomar o elevador para o andar do professor",
-                "biblioteca": "Ir para a biblioteca"
+                "biblioteca": "Ir para a entrada da biblioteca"
             }
         },
         "andar professor": {
@@ -30,22 +30,44 @@ def carregar_cenarios():
             "opcoes": {}
         },
         "biblioteca": {
-            "titulo": "Caverna da tranquilidade",
-            "descricao": "Voce esta na biblioteca",
+            "titulo": "Entrada da Biblioteca",
+            "descricao": "Bem-vindo a biblioteca. Aqui, existem muitas coisas para procurar, e algumas pessoas para conversar.",
             "opcoes": {
                 "inicio": "Voltar para o saguao de entrada"
                 "salas individuais": "Procurar colegas para ajudar na EP"
-                "Pesquisar por Acervo": "Procurar livros que possam ajudar"
+                "pesquisar no acervo": "Procurar livros que possam ajudar na EP"
+                "investigar": "Procurar itens no cenario atual"
             }
-        }
+        },
+        "salas indiviuais": {
+        	"titulo":"Silêncio, por favor"
+        	"descricao":"Voce precisa encontrar amigos que te ajudem a resolver a EP"
+        				"Tome cuidado para não entrar em uma sala que está ocupada por um veterano"
+        	"opcoes": {
+        		"biblioteca":"Voltar para a entrada da biblioteca"
+        		"sala 01":"Entrar na sala 01"
+        		"sala 02":"Entrar na sala 01"
+        		"investigar": "Procurar itens no cenario atual"		
+        },
+        "sala 01": {
+        	"titulo":"Sala de estudos 1"
+        	"descricao":"Essa sala esta vazia."
+        	"opcoes": {
+        		"salas individuais":"voltar para o corredor das salas individuais"
+        		"Investigar":"Procurar itens no cenario atual"
+        	}
+        },
+        "sala 02": {
+        	"titulo":"Sala de estudos 2"
+        	"descricao":"Essa sala esta cheia de veteranos reprovados enfurecidos!"
+        	"opcoes": {
+        		"salas individuais":"voltar para o corredor das salas individuais"
+        		"Investigar":"Procurar itens no cenario atual"
+        	}
+
     }
   
     return cenarios, nome_cenario_atual
-
-def mochila(): {
-	"Caderno":
-
-}
 
 
 def main():
