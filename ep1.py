@@ -68,6 +68,7 @@ def carregar_personagens(nome):
                     "speech": "Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
                         "algum aluno está dormindo na biblioteca.",
                     "status":{}},
+            
             "professor": {
                     "descricao": "o monstro do Python",
                     "saudacao": "Voce foi pedir para o professor adiar o EP."
@@ -75,7 +76,42 @@ def carregar_personagens(nome):
                              "e devorou sua alma.",
                     "opcoes": {},
                     "imortal":True,
-                    "status":{}},}
+                    "status":{}},
+            
+            "Ganiel Duzzo": {
+                    "descricao": "descrição do monstro 1 aqui.",
+                    "classe": 1,
+                    "agressividade": False,
+                    "status":{"vida": 100, "ataque":100, "defesa": 100},
+                    "opcoes":{
+                        "ignorar":"você irá ignorar a presença do personagem.",
+                        "fugir": "você irá empurrar o personagem e correr para o cenário anterior."}},
+
+            "Bibliotecaria": {
+                    "descricao": "Encontra-se ociosa olhando atentamente para o acervo de livros.",
+                    "classe": 1,
+                    "agressividade": False,
+                    "status":{"vida": 100, "ataque":100, "defesa": 100},
+                    "opcoes":{
+                        "conversar":"Bibliotecaria diz: Estou muito ocupada agora."
+                        ""
+                    }},
+        
+            "Hagemoto": {
+                    "descricao": "Nada se sabe sobre ele.",
+                    "classe": 1,
+                    "agressividade": False,
+                    "status":{"vida": 9999, "ataque": 9999, "defesa": 9999},
+                    "opcoes":{
+                        "ignorar":"você irá ignorar o monstro",
+                        "interagir": "você irá falar com ele"}},
+        
+            "Aluno dormindo no chão":{
+                "descricao": "Aluno dormindo próximo ao livro 'Think Python'.",
+                "classe": 99999999,
+                "agressividade": True,
+                "status":{"vida": 1, "ataque":0, "defesa": 0},
+                "opcoes":{}}}
             
     return personagens
 
