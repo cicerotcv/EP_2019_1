@@ -182,6 +182,8 @@ def main():
             elif start == 'combate':
                 resposta,game_over = carregar_luta(personagens[personagem]['imortal'],personagens[personagem]['status'],status)
                 print(resposta)
+            elif start in cenarios:
+                cena = start
             else:
                 print("Sua indecisão foi sua ruína!")
                 game_over = True
