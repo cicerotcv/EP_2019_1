@@ -65,58 +65,93 @@ def carregar_personagens(nome):
                             "conversar": "conversar com o Brian.",
                             "voltar":"voltar para o saguão."}, # ainda não foi implementado
                     "imortal": True,
-                    "speech": "Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
-                        "algum aluno está dormindo na biblioteca.",
-                    "status":{}},
+                    "speech": {
+                        "conversar":"Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
+                                    "algum aluno está dormindo na biblioteca.",
+                        "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
+                                "vitoria":"Brian diz: '''Nunca tive chance. Não era nem uma batalha. "+
+                                    "Tanto por profecias. Você é muito forte... {}...'''".format(nome)}},
+                    "status":[]},
             
             "professor": {
                     "descricao": "o monstro do Python",
                     "saudacao": "Voce foi pedir para o professor adiar o EP."
                              "O professor revelou que é um monstro disfarçado "
                              "e devorou sua alma.",
-                    "opcoes": {},
-                    "imortal":True,
-                    "status":{}},
+                    "opcoes": {"combate":"tente a sorte"},
+                    "imortal":False,
+                    "speech": {
+                        "conversar":"Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
+                                    "algum aluno está dormindo na biblioteca.",
+                        "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
+                                "vitoria":"Brian diz: Nunca tive chance. Não era nem uma batalha. "+
+                                    "Tanto por profecias. Você é muito forte... Saitama..."}},
+                    "status":[]},
             
             "Ganiel Duzzo": {
-                    "descricao": "descrição do monstro 1 aqui.",
-                    "classe": 1,
-                    "agressividade": False,
-                    "status":{"vida": 100, "ataque":100, "defesa": 100},
-                    "opcoes":{
-                        "ignorar":"você irá ignorar a presença do personagem.",
-                        "fugir": "você irá empurrar o personagem e correr para o cenário anterior."}},
+                    "descricao": "o monstro do Python",
+                    "saudacao": "Voce foi pedir para o professor adiar o EP."
+                             "O professor revelou que é um monstro disfarçado "
+                             "e devorou sua alma.",
+                    "opcoes": {"combate":"tente a sorte"},
+                    "imortal":False,
+                    "speech": {
+                        "conversar":"Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
+                                    "algum aluno está dormindo na biblioteca.",
+                        "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
+                                "vitoria":"Brian diz: Nunca tive chance. Não era nem uma batalha. "+
+                                    "Tanto por profecias. Você é muito forte... Saitama..."}},
+                    "status":[]},
 
             "Bibliotecaria": {
-                    "descricao": "Encontra-se ociosa olhando atentamente para o acervo de livros.",
-                    "classe": 1,
-                    "agressividade": False,
-                    "status":{"vida": 100, "ataque":100, "defesa": 100},
-                    "opcoes":{
-                        "conversar":"Bibliotecaria diz: Estou muito ocupada agora."
-                        ""
-                    }},
+                    "descricao": "o monstro do Python",
+                    "saudacao": "Voce foi pedir para o professor adiar o EP."
+                             "O professor revelou que é um monstro disfarçado "
+                             "e devorou sua alma.",
+                    "opcoes": {"combate":"tente a sorte"},
+                    "imortal":False,
+                    "speech": {
+                        "conversar":"Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
+                                    "algum aluno está dormindo na biblioteca.",
+                        "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
+                                "vitoria":"Brian diz: Nunca tive chance. Não era nem uma batalha. "+
+                                    "Tanto por profecias. Você é muito forte... Saitama..."}},
+                    "status":[]},
         
             "Hagemoto": {
-                    "descricao": "Nada se sabe sobre ele.",
-                    "classe": 1,
-                    "agressividade": False,
-                    "status":{"vida": 9999, "ataque": 9999, "defesa": 9999},
-                    "opcoes":{
-                        "ignorar":"você irá ignorar o monstro",
-                        "interagir": "você irá falar com ele"}},
+                    "descricao": "o monstro do Python",
+                    "saudacao": "Voce foi pedir para o professor adiar o EP."
+                             "O professor revelou que é um monstro disfarçado "
+                             "e devorou sua alma.",
+                    "opcoes": {"combate":"tente a sorte"},
+                    "imortal":False,
+                    "speech": {
+                        "conversar":"Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
+                                    "algum aluno está dormindo na biblioteca.",
+                        "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
+                                "vitoria":"Brian diz: Nunca tive chance. Não era nem uma batalha. "+
+                                    "Tanto por profecias. Você é muito forte... Saitama..."}},
+                    "status":[]},
         
             "Aluno dormindo no chão":{
-                "descricao": "Aluno dormindo próximo ao livro 'Think Python'.",
-                "classe": 99999999,
-                "agressividade": True,
-                "status":{"vida": 1, "ataque":0, "defesa": 0},
-                "opcoes":{}}}
+                    "descricao": "o monstro do Python",
+                    "saudacao": "Voce foi pedir para o professor adiar o EP."
+                             "O professor revelou que é um monstro disfarçado "
+                             "e devorou sua alma.",
+                    "opcoes": {"combate":"tente a sorte"},
+                    "imortal":False,
+                    "speech": {
+                        "conversar":"Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
+                                    "algum aluno está dormindo na biblioteca.",
+                        "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
+                                "vitoria":"Brian diz: Nunca tive chance. Não era nem uma batalha. "+
+                                    "Tanto por profecias. Você é muito forte... Saitama..."}},
+                    "status":[]}}
             
     return personagens
 
 #Função de Luta:
-def carregar_luta(immortality,skills_npc, skills_player):
+def carregar_luta(inimigo, player):
     if immortality == True:
         game_over = True
         text = "Você foi punido por código de ética!"
@@ -169,7 +204,7 @@ def main():
     print()
 
     #Loading
-    status = [100,10000,100]#Características do personagem
+    status = [100,10000,100] #Características do personagem
     cenarios, condicao = carregar_cenarios(name)
     personagens = carregar_personagens(name)
     game_over = False
@@ -216,7 +251,7 @@ def main():
                 start = voltar
                 
             elif start == 'combate':
-                resposta,game_over = carregar_luta(personagens[personagem]['imortal'],personagens[personagem]['status'],status)
+                resposta,game_over = carregar_luta(personagens[personagem],status)
                 print(resposta)
             elif start in cenarios:
                 cena = start
