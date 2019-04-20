@@ -68,7 +68,7 @@ def carregar_personagens(nome):
                     "opcoes": {
                             "combate":"lutar com o Brian.",
                             "conversar": "conversar com o Brian.",
-                            "voltar":"voltar para o saguão."}, # ainda não foi implementado
+                            "inicio":"voltar para o saguão."}, 
                     "imortal": True,
                     "speech": {
                         "conversar":"Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
@@ -76,8 +76,9 @@ def carregar_personagens(nome):
                         "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
                                 "vitoria":"Brian diz: '''Nunca tive chance. Não era nem uma batalha. "+
                                     "Tanto por profecias. Você é muito forte... {}...'''".format(nome)}},
-                    "status":[]},
-            
+                    "status":[],
+                    "item":{"Pizza no iFood"},
+                    "opcoes ocultas":{"Alimentar":"Dar pizza ao guarda"}},
             "professor": {
                     "descricao": "o monstro do Python",
                     "saudacao": "Voce foi pedir para o professor adiar o EP."
@@ -91,7 +92,9 @@ def carregar_personagens(nome):
                         "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
                                 "vitoria":"Brian diz: Nunca tive chance. Não era nem uma batalha. "+
                                     "Tanto por profecias. Você é muito forte... Saitama..."}},
-                    "status":[]},
+                    "status":[],
+                    "item":{},
+                    "opcoes ocultas":{}},
             
             "Ganiel Duzzo": {
                     "descricao": "o monstro do Python",
@@ -106,8 +109,9 @@ def carregar_personagens(nome):
                         "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
                                 "vitoria":"Brian diz: Nunca tive chance. Não era nem uma batalha. "+
                                     "Tanto por profecias. Você é muito forte... Saitama..."}},
-                    "status":[]},
-
+                    "status":[],
+                    "item":{},
+                    "opcoes ocultas":{}},
             "Bibliotecaria": {
                     "descricao": "o monstro do Python",
                     "saudacao": "Voce foi pedir para o professor adiar o EP."
@@ -121,8 +125,9 @@ def carregar_personagens(nome):
                         "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
                                 "vitoria":"Brian diz: Nunca tive chance. Não era nem uma batalha. "+
                                     "Tanto por profecias. Você é muito forte... Saitama..."}},
-                    "status":[]},
-        
+                    "status":[],
+                    "item":{},
+                    "opcoes ocultas":{}},
             "Hagemoto": {
                     "descricao": "o monstro do Python",
                     "saudacao": "Voce foi pedir para o professor adiar o EP."
@@ -136,8 +141,9 @@ def carregar_personagens(nome):
                         "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
                                 "vitoria":"Brian diz: Nunca tive chance. Não era nem uma batalha. "+
                                     "Tanto por profecias. Você é muito forte... Saitama..."}},
-                    "status":[]},
-        
+                    "status":[],
+                    "item":{},
+                    "opcoes ocultas":{}},
             "Aluno dormindo no chão":{
                     "descricao": "o monstro do Python",
                     "saudacao": "Voce foi pedir para o professor adiar o EP."
@@ -237,6 +243,7 @@ def main():
             opcoes = cenario_atual['opcoes']
             opcoes_ocultas = cenario_atual['opcoes ocultas']
             voltar = cena
+            tipo = cenarios
         elif cena in personagens:
             cenario_atual = cena
             titulo = personagens[cena]["descricao"]
@@ -244,6 +251,7 @@ def main():
             opcoes = personagens[cena]['opcoes']
             opcoes_ocultas = personagens[cena]['opcoes ocultas']
             personagem = cena
+            tipo = personagens
         print("{0}\n{1}\n{2}\n".format(titulo,"-"*len(titulo),descricao))
         if len(opcoes) == 0:
             print("Acabaram-se suas opções! Mwo mwo mwooooo...")
@@ -251,7 +259,7 @@ def main():
         else:
             print('O que você vai fazer?')
             print()
-            if cenarios[cena]['item'] in bolsa:
+            if tipo[cena]['item'] in bolsa:
                 for opcao in opcoes:
                     print('{0}: {1}'.format(opcao,opcoes[opcao]))
                 for opcao_oculta in opcoes_ocultas:
