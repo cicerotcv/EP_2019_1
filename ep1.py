@@ -7,7 +7,7 @@
 def creditos(entrada):
     lista = [
         "\nEste código foi desenvolvido em conjunto por Cicero Tiago e Luiz Felipe.",
-        "Sinceramente, esperamos que tenha uma experiencia satisfatória, {}".format(entrada),
+        "Sinceramente, esperamos que tenha uma experiencia satisfatória, {}.".format(entrada),
         "Não foi fácil encontrar essa forma mais 'enxuta' de escrever os códigos e de relacionar os comandos.",
         "(sim, acredite! O código estava ficando tão (e desnecessariamente) grande e complexo que "
         "tínhamos a impressão de que a qualquer momento ele assumiria o controle do computador e se iniciaria a 'Era das Máquinas'.\n\n"]
@@ -66,16 +66,40 @@ def carregar_personagens(nome):
                             "voltar":"voltar para o saguão."}, # ainda não foi implementado
                     "imortal": True,
                     "speech": "Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
-                        "algum aluno está dormindo na biblioteca."},
+                        "algum aluno está dormindo na biblioteca.",
+                    "status":{}},
             "professor": {
                     "descricao": "o monstro do Python",
                     "saudacao": "Voce foi pedir para o professor adiar o EP."
                              "O professor revelou que é um monstro disfarçado "
                              "e devorou sua alma.",
                     "opcoes": {},
-                    "imortal":True}
-            }
+                    "imortal":True,
+                    "status":{}},}
+            
     return personagens
+
+#Função de Luta:
+def carregar_luta(immortality,skills_npc, skills_player):
+    if immortality == True:
+        game_over = True
+        text = "Você foi punido por código de ética!"
+    else:
+        if skills_player[1] == skills_npc[1]:
+            skills_player[0] = skills_player[0] / 2
+            text = "Vocês empataram. Você perdeu metade da sua vida por conta do desgaste."
+            game_over = False
+        elif skills_player[1] > skills_npc[1]:
+            text = "Você venceu a luta!"
+            game_over = False
+        else:
+            skills_player[0] = skills_player[0] - (skills_npc[1] - skills_player[1])
+            if skills_player[0] <= 0:
+                game_over = True
+                text = "você foi derrotado, fim de jogo para você!"
+            else:
+                game_over = False
+    return text,game_over
 
 #Função Principal
 def main():
@@ -108,25 +132,29 @@ def main():
         "adiamento do EP (boa sorte...)")
     print()
 
-
+    #Loading
+    status = [100,10000,100]#Características do personagem
     cenarios, condicao = carregar_cenarios(name)
     personagens = carregar_personagens(name)
     game_over = False
+    start = condicao
 
-
+    #Rodada do Jogo
     while not game_over:
         #Loading Inicial
-        if condicao in cenarios:
-            cenario_atual = cenarios[condicao]
+        cena = start
+        if cena in cenarios:
+            cenario_atual = cenarios[cena]
             titulo = cenario_atual["titulo"]
             descricao = cenario_atual["descricao"]
             opcoes = cenario_atual['opcoes']
-        else:
-            cenario_atual = escolha
-            titulo = personagens[escolha]["descricao"]
+            voltar = cena
+        elif cena in personagens:
+            cenario_atual = cena
+            titulo = personagens[cena]["descricao"]
             descricao = "Você está falando com {0}".format(titulo)
-            opcoes = personagens[escolha]['opcoes']
-            
+            opcoes = personagens[cena]['opcoes']
+            personagem = cena
             
         print("{0}\n{1}\n{2}\n".format(titulo,"-"*len(titulo),descricao))
         
@@ -140,23 +168,20 @@ def main():
                 print('{0}: {1}'.format(opcao,opcoes[opcao]))
             
             
-            escolha = input(">>>>> ")  # palavra mágica do jogo
+            start = input(">>>>> ")  # palavra mágica do jogo
             
             
-            if escolha == "prefiro pegar DP": 
+            if start == "prefiro pegar DP": 
                 break
-            
-            elif escolha in opcoes:
-                condicao = escolha
-            
-            elif escolha in personagens:
-                print(personagens[escolha]["saudacao"])
-            elif escolha == "voltar":
-                escolha = condicao
+
+            elif start in personagens:
+                print(personagens[start]["saudacao"])
+            elif start == "voltar":
+                start = voltar
                 
-            elif escolha == 'combate':
-                print(condicao)
-            
+            elif start == 'combate':
+                resposta,game_over = carregar_luta(personagens[personagem]['imortal'],personagens[personagem]['status'],status)
+                print(resposta)
             else:
                 print("Sua indecisão foi sua ruína!")
                 game_over = True
