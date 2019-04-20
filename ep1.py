@@ -62,9 +62,8 @@ def carregar_cenarios():
                 "salas individuais": "Procurar colegas para ajudar na EP",
                 "pesquisar no acervo": "Procurar livros que possam ajudar na EP",
                 "investigar": "Procurar itens no cenario"},
-            "monstros": {}
+            "monstros": {'bibliotecaria'}
             },
-        
         "salas individuais": {
             "titulo":"Silêncio, por favor",
             "descricao":"Voce precisa encontrar amigos que te ajudem a resolver a EP"
@@ -106,7 +105,7 @@ def carregar_cenarios():
     nome_cenario_atual = "inicio"
     return cenarios, nome_cenario_atual
 
-def NPCs():
+def carregar_inimigos(x,y):
     inimigos = {
     "Professor": {
         "descricao": "O Monstro do Python",
@@ -121,22 +120,23 @@ def NPCs():
         "opcoes":{
             "ignorar":"você irá ignorar o monstro.",
             "fugir": "você irá empurrar o monstro e correr para o cenário anterior."}},
-    
-    "Veterano Enfurecido": {
-        "descricao": "descrição do monstro 1 aqui.",
-        "dificuldade": 1,
-        "status":{"vida": 100, "ataque":100, "defesa": 100},
-        "opcoes":{
-            "ignorar":"você irá ignorar o monstro.",
-            "fugir": "você irá empurrar o monstro e correr para o cenário anterior."}}
+    }
+     "sala 02": "Veterano Enfurecido": {
+                    "descricao": "descrição do monstro 1 aqui.",
+                    "dificuldade": 1,
+                    "status":{"vida": 100, "ataque":100, "defesa": 100},
+                    "opcoes":{
+                            "ignorar":"você irá ignorar o monstro.",
+                            "fugir": "você irá empurrar o monstro e correr para o cenário anterior."}}
                 }
-    outros = {
-    "Bibliotecaria": {
-            "descricao": "Encontra-se ociosa olhando atentamente para o acervo de livros.",
-            "dificuldade": 99999999,
-            "status":{"vida": 100, "ataque":100, "defesa": 100},
-            "opcoes":{}},
-
+    
+    "biblioteca":{
+            "Bibliotecaria": {
+                         "descricao": "Encontra-se ociosa olhando atentamente para o acervo de livros.",
+                         "dificuldade": 99999999,
+                         "status":{"vida": 100, "ataque":100, "defesa": 100},
+                         "opcoes":{}},
+                    },
     "Hagemoto": {
         "descricao": "Nunca foi visto.",
         "dificuldade": 99999,
@@ -151,7 +151,9 @@ def NPCs():
             "status":{"vida": 100, "ataque":100, "defesa": 100},
             "opcoes":{}}
     }
-    return inimigos,outros
+    
+    nome_inimigo_atual = x[y]['monstros']
+    return nome_inimigo_atual
 
 
 def mochila(): {
@@ -173,6 +175,7 @@ def investigar():
                 "observar":"não há quase nada aqui"},
         
         }
+    
 # Função Principal
 def main():
     #Introdução do Jogo
@@ -185,6 +188,9 @@ def main():
         "adiamento do EP (boa sorte...)\n")
     #Carregamento dos Cenários e do Início
     cenarios, nome_cenario_atual = carregar_cenarios()
+    #Carregamento dos inimigos
+    nome_inimigo_atual = carregar_inimigos(cenarios,nome_cenario_atual)
+##########################################################
     #Condição para o Game Over
     game_over = False 
     #Enquanto não for Game Over
@@ -209,6 +215,8 @@ def main():
             escolha = input("O que você vai fazer? ")
             if escolha in opcoes:
                 nome_cenario_atual = escolha
+            elif escolha == 'monstro':
+                print(nome_inimigo_atual)
             else:
                 print("Sua indecisão foi sua ruína!")
                 game_over = True
