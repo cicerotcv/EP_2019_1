@@ -53,15 +53,19 @@ def main():
         "na entrada do Insper, e quer procurar o professor para pedir um "
         "adiamento do EP (boa sorte...)")
     print()
-
+    
+    name = input("Olá, visitante! Qual seu nome? \n>>>>> ")
+    print("Olá, {0}! Espero que faça um bom jogo.\n{1}\n".format(name,len(name)*'-'))
+    
     cenarios, nome_cenario_atual = carregar_cenarios()
 
     game_over = False
     while not game_over:
         cenario_atual = cenarios[nome_cenario_atual]
-
-        # Aluno A: substitua este comentário pelo código para imprimir 
-        # o cenário atual.
+        titulo = cenario_atual["titulo"]
+        descricao = cenario_atual["descricao"]
+        
+        print(titulo,'\n{0}\n\n{1}\n'.format("-"*len(titulo),descricao))
 
         opcoes = cenario_atual['opcoes']
         if len(opcoes) == 0:
