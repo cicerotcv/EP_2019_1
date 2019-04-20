@@ -32,25 +32,30 @@ def carregar_cenarios(nome):
             "opcoes": {
                 "setimo andar": "Tomar o elevador para o andar do professor",
                 "biblioteca": "Ir para a biblioteca",
-                "guarda": "Seu Brian"
-            }
-        },
+                "guarda": "Seu Brian",
+                "investigar": "Busque no cenário se há alguma coisa"},
+            "item":"carterinha do guarda",
+            "opcoes ocultas":{"Porta para Escadas":"Somente pessoas autorizadas podem entrar aqui"}},
         "setimo andar": {
             "titulo": "Andar do desespero",
             "descricao": "Voce chegou ao andar da sala do seu professor",
             "opcoes": {
                 "inicio": "Tomar o elevador para o saguao de entrada",
-                "professor": "Falar com o professor"
-            }
+                "professor": "Falar com o professor",
+                "investigar": "Busque no cenário se há alguma coisa"},
+            "item":"carterinha de Marcos da Costa",
+            "opcoes ocultas":{},
         },
         "biblioteca": {
             "titulo": "Caverna da tranquilidade",
             "descricao": "Voce esta na biblioteca",
             "opcoes": {
-                "inicio": "Voltar para o saguao de entrada"
+                "inicio": "Voltar para o saguao de entrada",
+                "investigar": "Busque no cenário se há alguma coisa"},
+            "item":{},
+            "opcoes ocultas":{}
             }
         }
-    }
     nome_cenario_atual = "inicio"
     return cenarios, nome_cenario_atual
 
@@ -172,6 +177,16 @@ def carregar_luta(inimigo, player):
                 game_over = False
     return text,game_over
 
+def carregar_inventario(lugar):
+    cenas = {
+                "guarda":"carterinha do guarda",
+                "biblioteca": "iPhone XII",
+                "setimo andar": "carterinha de Marcos da Costa"}
+    if lugar in cenas:
+       return True,cenas[lugar],
+    else:
+       return False, None
+    
 #Função Principal
 def main():
     
@@ -205,6 +220,7 @@ def main():
 
     #Loading
     status = [100,10000,100] #Características do personagem
+    bolsa = []
     cenarios, condicao = carregar_cenarios(name)
     personagens = carregar_personagens(name)
     game_over = False
@@ -219,40 +235,55 @@ def main():
             titulo = cenario_atual["titulo"]
             descricao = cenario_atual["descricao"]
             opcoes = cenario_atual['opcoes']
+            opcoes_ocultas = cenario_atual['opcoes ocultas']
             voltar = cena
         elif cena in personagens:
             cenario_atual = cena
             titulo = personagens[cena]["descricao"]
             descricao = "Você está falando com {0}".format(titulo)
             opcoes = personagens[cena]['opcoes']
+            opcoes_ocultas = personagens[cena]['opcoes ocultas']
             personagem = cena
-            
         print("{0}\n{1}\n{2}\n".format(titulo,"-"*len(titulo),descricao))
-        
         if len(opcoes) == 0:
             print("Acabaram-se suas opções! Mwo mwo mwooooo...")
             game_over = True
         else:
             print('O que você vai fazer?')
             print()
-            for opcao in opcoes:
-                print('{0}: {1}'.format(opcao,opcoes[opcao]))
-            
-            
+            if cenarios[cena]['item'] in bolsa:
+                for opcao in opcoes:
+                    print('{0}: {1}'.format(opcao,opcoes[opcao]))
+                for opcao_oculta in opcoes_ocultas:
+                    print('{0}: {1}'.format(opcao_oculta,opcoes_ocultas[opcao_oculta]))
+            else:
+                for opcao in opcoes:
+                    print('{0}: {1}'.format(opcao,opcoes[opcao]))
             start = input(">>>>> ")  # palavra mágica do jogo
-            
-            
             if start == "prefiro pegar DP": 
                 break
-
             elif start in personagens:
                 print(personagens[start]["saudacao"])
             elif start == "voltar":
                 start = voltar
-                
             elif start == 'combate':
                 resposta,game_over = carregar_luta(personagens[personagem],status)
                 print(resposta)
+
+            elif start == "investigar":
+                verifica,item = carregar_inventario(cena)
+                if verifica == True:
+                    bolsa.append(item)
+                    print("----------------------------------")
+                    print("Parabéns! \n")
+                    print("Você acaba de ganhar o item {0} \n {0} está agora guardada na sua bolsa".format(item))
+                    enter = input("Aperte enter para voltar para o(a) {0}".format(voltar))
+                    start = voltar
+                else:
+                    print("----------------------------------")
+                    print("não há nada para encontrar")
+                    enter = input("Aperte enter para voltar para o(a) {0}".format(voltar))
+                    start = voltar
             elif start in cenarios:
                 cena = start
             else:
@@ -260,7 +291,6 @@ def main():
                 game_over = True
 
     print("Você morreu!")
-
 
 # Programa principal.
 if __name__ == "__main__":
