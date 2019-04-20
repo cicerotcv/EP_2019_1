@@ -55,7 +55,7 @@ def main():
     print()
     
     name = input("Olá, visitante! Qual seu nome? \n>>>>> ")
-    print("Olá, {0}! Espero que faça um bom jogo.\n{1}\n".format(name,len(name)*'-'))
+    print("Olá, {0}! Espero que faça um bom jogo!\n{1}\n".format(name,(35+len(name))*'-'))
     
     cenarios, nome_cenario_atual = carregar_cenarios()
 
