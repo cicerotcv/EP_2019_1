@@ -35,7 +35,7 @@ def carregar_cenarios():
                 "biblioteca": "Ir para a entrada da biblioteca",
                 "conversar":"interagir com as pessoas do cenario",
                 "investigar":"Procurar itens no cenario"},
-            "monstros": {}},
+            "monstros": [],
             "investigar": "Não há nada aqui.",
         
         "andar professor": {
@@ -44,7 +44,7 @@ def carregar_cenarios():
             "opcoes": {
                 "inicio": "Tomar o elevador para o saguao de entrada.",
                 "professor": "Falar com o professor."},
-            "monstros": {}},
+            "monstros": []},
         
         "professor": {
             "titulo": "O monstro do Python.",
@@ -52,7 +52,7 @@ def carregar_cenarios():
                          "O professor revelou que é um monstro disfarçado."
                          "e devorou sua alma.",
             "opcoes": {},
-            "monstros": {}
+            "monstros": []
         },
         "biblioteca": {
             "titulo": "Entrada da Biblioteca",
@@ -62,19 +62,19 @@ def carregar_cenarios():
                 "salas individuais": "Procurar colegas para ajudar na EP",
                 "pesquisar no acervo": "Procurar livros que possam ajudar na EP",
                 "investigar": "Procurar itens no cenario"},
-            "monstros": {}
+            "monstros": []
             },
         
         "salas individuais": {
             "titulo":"Silêncio, por favor",
-            "descricao":"Voce precisa encontrar amigos que te ajudem a resolver a EP"
+            "descricao":"Voce precisa encontrar amigos que te ajudem a resolver a EP. "
                         "Tome cuidado para não entrar em uma sala que está ocupada por um veterano",
             "opcoes": {
                 "biblioteca":"Voltar para a entrada da biblioteca",
                 "sala 01":"Entrar na sala 01",
                 "sala 02":"Entrar na sala 02",
                 "investigar": "Procurar itens no cenario"},
-            "monstros": {}
+            "monstros": []
             },
         
         "sala 01": {
@@ -83,7 +83,7 @@ def carregar_cenarios():
             "opcoes": {
                 "salas individuais":"voltar para o corredor das salas individuais",
                 "investigar":"Procurar itens no cenario"},
-            "monstros": {}
+            "monstros": []
             },
         
         "sala 02": {
@@ -93,16 +93,9 @@ def carregar_cenarios():
                 "salas individuais":"voltar para o corredor das salas individuais",
                 "conversar":"interagir com as pessoas do cenario",
                 "investigar":"Procurar itens no cenario"},
-            "monstros": {
-                    "monstro1": {
-                            "descricao": "descrição do monstro 1 aqui",
-                            "dificuldade": 1,
-                            "status":{"vida":100, "agilidade":100,"força":100},
-                            "opcoes":{
-                                    "atacar":"você irá atacar o monstro",
-                                    "fugir": "você irá empurrar o monstro e correr para o cenário anterior"}}}
+            "monstros": []
             }
-    }
+    }}
     nome_cenario_atual = "inicio"
     return cenarios, nome_cenario_atual
 
@@ -110,46 +103,56 @@ def NPCs():
     inimigos = {
     "Professor": {
         "descricao": "O Monstro do Python",
-        "dificuldade": 3,
+        "classe": 1,
+        "agressividade": True,
         "status":{"vida": 1000, "ataque":100, "defesa": 50},
-    	"opcoes":{}},
-
-    "Ganiel Duzzo": {
-        "descricao": "descrição do monstro 1 aqui.",
-        "dificuldade": 1,
-        "status":{"vida": 100, "ataque":100, "defesa": 100},
         "opcoes":{
-            "ignorar":"você irá ignorar o monstro.",
-            "fugir": "você irá empurrar o monstro e correr para o cenário anterior."}},
-    
+            "conversar":"Professor diz: Você não deveria tentar me enganar"}},
+
     "Veterano Enfurecido": {
         "descricao": "descrição do monstro 1 aqui.",
-        "dificuldade": 1,
+        "classe": 2,
+        "agressividade": True,
         "status":{"vida": 100, "ataque":100, "defesa": 100},
         "opcoes":{
             "ignorar":"você irá ignorar o monstro.",
-            "fugir": "você irá empurrar o monstro e correr para o cenário anterior."}}
-                }
+            "fugir": "você irá empurrar o monstro e correr para o cenário anterior."}}}
+
     outros = {
+    "Ganiel Duzzo": {
+        "descricao": "descrição do monstro 1 aqui.",
+        "classe": 1,
+        "agressividade": False,
+        "status":{"vida": 100, "ataque":100, "defesa": 100},
+        "opcoes":{
+            "ignorar":"você irá ignorar a presença do personagem.",
+            "fugir": "você irá empurrar o personagem e correr para o cenário anterior."}},
+
     "Bibliotecaria": {
-            "descricao": "Encontra-se ociosa olhando atentamente para o acervo de livros.",
-            "dificuldade": 99999999,
-            "status":{"vida": 100, "ataque":100, "defesa": 100},
-            "opcoes":{}},
+        "descricao": "Encontra-se ociosa olhando atentamente para o acervo de livros.",
+        "classe": 1,
+        "agressividade": False,
+        "status":{"vida": 100, "ataque":100, "defesa": 100},
+        "opcoes":{
+            "conversar":"Bibliotecaria diz: Estou muito ocupada agora."
+            ""
+            }},
 
     "Hagemoto": {
-        "descricao": "Nunca foi visto.",
-        "dificuldade": 99999,
-        "status":{"vida": 999, "ataque": 999, "defesa": 999},
+        "descricao": "Nada se sabe sobre ele.",
+        "classe": 1,
+        "agressividade": False,
+        "status":{"vida": 9999, "ataque": 9999, "defesa": 9999},
         "opcoes":{
             "ignorar":"você irá ignorar o monstro",
             "interagir": "você irá falar com ele"}},
 
     "Aluno dormindo no chão":{
-            "descricao": "Aluno dormindo próximo ao livro 'Think Python'.",
-            "dificuldade": 99999999,
-            "status":{"vida": 100, "ataque":100, "defesa": 100},
-            "opcoes":{}}
+        "descricao": "Aluno dormindo próximo ao livro 'Think Python'.",
+        "classe": 99999999,
+        "agressividade": True,
+        "status":{"vida": 1, "ataque":0, "defesa": 0},
+        "opcoes":{}}
     }
     return inimigos,outros
 
@@ -158,21 +161,30 @@ def mochila(): {
     "Caderno":"anotações"
     }
     
-def investigar():
+def interagir():
         locais = {
         "inicio": {
-                "observar":"não há nada aqui",
+                "observar":{
+                        "pessoas":["não há ninguém aqui"],
+                        "objetos":["não há nada aqui"]},
                 "pegar":"não há nada para pegar",
-                "andar":"Você pode ir para a biblioteca ou para o andar do professor"},
+                "andar":"Você pode ir para a 'biblioteca' ou para o 'andar do professor'",
+                "conversar":{}},
+        
         "biblioteca":{
                 "observar":{
-                        "Pessoas":["Aluno dormindo no chão","Bibliotecaria"],
-                        "Objetos":["livros"]},
-                "itens visíveis":["Think Python",""]},
-        "andar do professor": {
-                "observar":"não há quase nada aqui"},
+                        "pessoas":["aluno dormindo no chão próximo a um livro","Bibliotecaria"],
+                        "objetos":"o livro Think Python"},
+                "pegar":"livro Think Python"
+                },
         
-        }
+        "andar do professor": {
+                "observar":{"pessoas":"não há ninguém aqui",
+                            "objetos":["extintor de incêndio","pacote de balas de café"]},
+                "pegar": {}
+        }}
+        return locais
+
 # Função Principal
 def main():
     #Introdução do Jogo
