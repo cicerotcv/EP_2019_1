@@ -1,0 +1,33 @@
+cenarios:							acesso normal:					acesso oculto:
+inicio								> setimo andar / biblioteca 	// 
+escadas								> inicio / setimo andar 		// refeitorio // sala de estudos
+setimo andar						> inicio						// sala secreta // escadas
+refeitorio							> 								// escadas
+biblioteca							> inicio 						// outra dimensao		
+outra dimensao						> biblioteca 					// 
+sala de estudos						> escadas						// refeitorio
+sala vazia							> setimo andar					//
+
+personagens:						localização:	
+guarda								> inicio
+professor							> setimo andar
+Ganiel Duzzo						> setimo andar
+bibliotecaria						> biblioteca
+Hagemoto							> // outra dimensao
+veterano enfurecido					> // inicio			
+
+itens:								localização
+carteirinha do guarda 				> guarda
+Think Python 						> escadas
+carteirinha de Marcos da Costa		> Hagemoto
+extintor de incendio				> setimo andar
+pizza do InsperFoods				> refeitorio
+joia do espaco						> outra dimensao
+chave triangular					> Ganiel Duzzo
+notebook de algum bolsista			> sala de estudos
+iPhone XII							> biblioteca
+pedacos de papel					> veterano enfurecido
+EP feita							> porta estranha
+clipes metalicos					> bibliotecaria
+palitos de picole					> sala secreta
+canudos								> sala vazia
