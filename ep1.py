@@ -4,6 +4,10 @@
 # Alunos: 
 # - aluno A: Cicero Tiago Carneiro Valentim, cicerotcv@al.insper.edu.br
 # - aluno B: Luiz Felipe Lazzaron, luizfl@al.insper.edu.br
+from random import randint
+
+name = input("\nOlá, visitante! Qual seu nome? \n>>>>> ")
+
 def creditos(entrada):
     lista = [
         "\nEste código foi desenvolvido em conjunto por Cicero Tiago e Luiz Felipe.",
@@ -64,14 +68,15 @@ def carregar_personagens(nome):
                             "combate":"lutar com o Brian.",
                             "conversar": "conversar com o Brian.",
                             "voltar":"voltar para o saguão."}, # ainda não foi implementado
-                    "imortal": True,
+                    "imortal": False,
                     "speech": {
                         "conversar":"Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
                                     "algum aluno está dormindo na biblioteca.",
                         "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
                                 "vitoria":"Brian diz: '''Nunca tive chance. Não era nem uma batalha. "+
-                                    "Tanto por profecias. Você é muito forte... {}...'''".format(nome)}},
-                    "status":[]},
+                                    "Tanto por profecias. Você é muito forte... {}...'''".format(nome),
+                                "imortal":"você foi obliterado"}},
+                    "status":[100,100,100]}, # [vida,ataque,defesa]
             
             "professor": {
                     "descricao": "o monstro do Python",
@@ -109,7 +114,7 @@ def carregar_personagens(nome):
                              "O professor revelou que é um monstro disfarçado "
                              "e devorou sua alma.",
                     "opcoes": {"combate":"tente a sorte"},
-                    "imortal":False,
+                    "imortal":True,
                     "speech": {
                         "conversar":"Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
                                     "algum aluno está dormindo na biblioteca.",
@@ -151,32 +156,95 @@ def carregar_personagens(nome):
     return personagens
 
 #Função de Luta:
-def carregar_luta(inimigo, player):
-    if immortality == True:
+def carregar_luta(characters,inimigo, player,):
+    # characters: dicionario com todos os personagens carregado -> usar 'personagens' na chamada da função
+    # inimigo: nome do inimigo -> usar 'personagem' na chamada da função
+    # player: status do jogador: status -> usar 'player_status' na chamada da função [vida,ataque,defesa]''
+    game_over = False
+    enemy = characters[inimigo] # valor de dicionario
+    enemy_status = enemy["status"] # valor de lista [vida,ataque,defesa]
+
+    if enemy["imortal"] == True:
         game_over = True
-        text = "Você foi punido por código de ética!"
+        text = enemy["speech"]["luta"]["imortal"]
+    
     else:
-        if skills_player[1] == skills_npc[1]:
-            skills_player[0] = skills_player[0] / 2
-            text = "Vocês empataram. Você perdeu metade da sua vida por conta do desgaste."
-            game_over = False
-        elif skills_player[1] > skills_npc[1]:
-            text = "Você venceu a luta!"
-            game_over = False
-        else:
-            skills_player[0] = skills_player[0] - (skills_npc[1] - skills_player[1])
-            if skills_player[0] <= 0:
-                game_over = True
-                text = "você foi derrotado, fim de jogo para você!"
-            else:
-                game_over = False
-    return text,game_over
+        battle = True 
+        battle_ini = ["\nEis que se inicia a batalha", "\nComeçou!", "\nPrepare-se!", "\nSe inicia um dos maiores duelos de todos os tempos"]
+        texto_inicio = battle_ini[randint(0,len(battle_ini)-1)]
+        print(texto_inicio+len(texto_inicio)*("-")+"\n")
+        
+        while battle:
+            sorte = randint(0,100)
+            azar = randint(-100,0)
+        
+            if (player[1] >= enemy_status[2]): # se o ataque do jogador for maior que a defesa do inimigo:
+            
+                # Turno do jogador:
+                player_damage = round((player[1] - enemy_status[2] + (2*sorte) + azar)/100)*randint(0,10) # dano causado pelo jogador
+                if player_damage < 0:
+                    player_damage = 0
+                
+                enemy_status[0] -= round(player_damage) # atualizacao da vida do inimigo
+                if enemy_status[0] < 0:
+                    enemy_status[0] = 0
+                    battle = False
+                    text = "\nSeu adversário acabou interrompendo a luta."
+                print("\n{0} recebe {1} de dano. Vida atual:{2} pontos de vida.".format(inimigo, player_damage, enemy_status[0]))
+                if not battle:
+                    break
+                
+                # Turno do inimigo:
+                enemy_damage = round((enemy_status[1] - player[2] + sorte + azar)/100)*randint(0,20) # dano causado pelo inimigo
+                if enemy_damage < 0:
+                    enemy_damage = 0
+                player[0] -= round(enemy_damage) # atualização da vida do jogador
+                
+                if player[0] <= 0: # checar se o jogador morreu
+                    player[0] = 0
+                    battle = False
+                    game_over = True
+                    text = "\nVocê foi obliterado. Então..."
+                print("\nVocê recebe {0} de dano. Vida atual: {1} pontos de vida.".format(enemy_damage,player[0]))
+
+
+            elif (player[1] < enemy_status[2]): # se o ataque do jogador for menor que a defesa do inimigo:
+                
+                # Turno do jogador:
+                player_damage = ((player[1] - enemy_status[2] + sorte + azar)/100)*randint(0,20) # dano causado pelo jogador
+                if player_damage < 0:
+                    player_damage = 0
+                enemy_status[0] -= round(player_damage) # atualizacao da vida do inimigo
+                
+                if enemy_status[0] < 0:
+                    enemy_status[0] = 0
+                    battle = False
+                    text = "\nSeu adversário acabou interrompendo a luta"
+                print("\n{0} recebe {1} de dano. Vida atual:{2} pontos de vida.".format(inimigo,player_damage,enemy_status[0]))
+                if not battle:
+                    break
+                
+                # Turno do inimigo:
+                enemy_damage = ((enemy_status[1] - player[2] + sorte + azar)/100)*randint(0,10) # dano causado pelo inimigo
+                if enemy_damage < 0:
+                    enemy_damage = 0
+                player[1] -= round(enemy_damage) # atualização da vida do jogador
+                
+                if player[0] <= 0:
+                    player[0] = 0
+                    battle = False
+                    game_over = True
+                    text = "Você foi obliterado. Então..."
+                print("\nVocê recebe {0} de dano. Vida atual: {1} pontos de vida.".format(enemy_damage,player[0]))
+
+
+
+    return text, game_over
 
 #Função Principal
 def main():
     
-    name = input("Olá, visitante! Qual seu nome? \n>>>>> ")
-    
+
     comecar = False
     while not comecar:
         key = input("Olá, {0}! Aperte enter para começar, digite 'creditos' para exibir "
@@ -189,6 +257,7 @@ def main():
         else:
             comecar = True
             print("\n\n=-=-=-=-=-= VAMOS COMEÇAR =-=-=-=-=-=\n\n")
+
         
         
     # Introdução
@@ -204,9 +273,9 @@ def main():
     print()
 
     #Loading
-    status = [100,10000,100] #Características do personagem
-    cenarios, condicao = carregar_cenarios(name)
-    personagens = carregar_personagens(name)
+    player_status = [100,100,100] #Características do personagem [hp,atk,def]
+    cenarios, condicao = carregar_cenarios(name) # dicionarios
+    personagens = carregar_personagens(name) # valor de dicionario
     game_over = False
     start = condicao
 
@@ -251,8 +320,11 @@ def main():
                 start = voltar
                 
             elif start == 'combate':
-                resposta,game_over = carregar_luta(personagens[personagem],status)
+                resposta,game_over = carregar_luta(personagens,personagem,player_status)
                 print(resposta)
+                if not game_over:  # jogador volta ao início
+                    start = voltar
+                    personagens[personagem] 
             elif start in cenarios:
                 cena = start
             else:
