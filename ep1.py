@@ -303,7 +303,7 @@ def carregar_luta(characters,inimigo, player,):
                     enemy_status[0] = 0
                     battle = False
                     text = enemy["speech"]["luta"]["vitoria"]
-                print("\n{0} recebe {1} de dano. Vida atual:{2} pontos de vida.".format(inimigo, player_damage, enemy_status[0]))
+                print("\n{0} recebe {1} de dano. Vida atual: {2} pontos de vida.".format(inimigo, player_damage, enemy_status[0]))
                 if not battle:
                     break
                 
@@ -333,7 +333,7 @@ def carregar_luta(characters,inimigo, player,):
                     enemy_status[0] = 0
                     battle = False
                     text = enemy["speech"]["luta"]["vitoria"]
-                print("\n{0} recebe {1} de dano. Vida atual:{2} pontos de vida.".format(inimigo,player_damage,enemy_status[0]))
+                print("\n{0} recebe {1} de dano. Vida atual: {2} pontos de vida.".format(inimigo,player_damage,enemy_status[0]))
                 if not battle:
                     break
                 
