@@ -221,10 +221,10 @@ def carregar_personagens(nome):
                     "opcoes ocultas":{}},
             
             "bibliotecaria": {
-                    "descricao": "o monstro do Python",
+                    "descricao": "o monstro dos livros",
                     "opcoes": {"combate":"tente a sorte",
                                "conversar":"converse com ela."},
-                    "imortal":True,
+                    "imortal":False,
                     "derrotado":False,
                     "speech": {
                         "conversar":"Olá, {0}, você sabia que é saudável digitar".format(nome)+ 
