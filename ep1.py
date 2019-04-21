@@ -56,7 +56,7 @@ def carregar_cenarios(nome):
                 "inicio": "voltar para o saguao de entrada",
                 "setimo andar": "subir escadas até o sétimo andar",
                 "investigar": "Busque nas escadarias se há alguma coisa útil"},
-            "item":"pizza do InsperFoods",
+            "item":"canudos",
             # item disponivel: livro Think Python 
             "opcoes ocultas":{"refeitorio":"vá para o refeitório usando escadas.",
                               "sala de estudos": "vá até a sala de estudos"},
@@ -84,7 +84,7 @@ def carregar_cenarios(nome):
                 "setimo andar": "Voltar para o setimo andar",
                 "investigar": "Veja se há alguma coisa na sala vazia"},
             "item":"chave triangular",
-            # item disponivel: EP feita
+            # item disponivel: canudos
             "opcoes ocultas":{"porta estranha":"você nota um orifício triangular"}
         },
         "porta estranha":{
@@ -129,7 +129,7 @@ def carregar_cenarios(nome):
             "opcoes": {
                 "setimo andar": "Voltar para o saguao de entrada.",
                 "investigar": "pegue uma das chaves da mesa."},
-            "item":{"joia do espaco"},
+            "item":"joia do espaco",
             # item disponivel: palitos de picole
             "opcoes ocultas":{"inicio":"se teletransporte para o inicio",
                               "refeitorio":"va para o refeitorio",
@@ -146,7 +146,7 @@ def carregar_cenarios(nome):
                 "inicio": "Voltar para o saguao de entrada",
                 "investigar": "Busque no cenário se há alguma coisa",
                 "bibliotecaria": "falar com a bibliotecaria"},
-            "item":{"Think Python"},
+            "item":"Think Python",
             # item disponivel: iPhone XII
             "opcoes ocultas":{"outra dimensao":"Você se senta para ler o livro Think Python e acaba dormindo"}
         },
@@ -157,7 +157,7 @@ def carregar_cenarios(nome):
             "opcoes": {
                 "biblioteca": "voltar para a biblioteca",
                 "investigar": "Busque no cenário se há alguma coisa"},
-            "item":{"Think Python"},
+            "item":"Think Python",
             # Item disponível: joia do espaco
             "opcoes ocultas":{"Hagemoto":"falar com Hagemoto."}
         }
@@ -184,7 +184,7 @@ def carregar_personagens(nome):
                                 "imortal":"Você foi obliterado",
                                 "derrotado":"O guarda já foi derrotado."}},
                     "status":[100,100,100], # [vida,ataque,defesa]
-                    "item":{"pizza do InsperFoods"},
+                    "item":"pizza do InsperFoods",
                     "opcoes ocultas":{"sala de estudos":"dê pizza ao guarda para acessar"}},
             
             "professor": {
@@ -201,8 +201,8 @@ def carregar_personagens(nome):
                                 "vitoria":"Como eu poderia ter sido esmagado \npor alguém como você??? Aerrrgh!".format(nome),
                                  }},
                     "status":[500,100,100],
-                    "item":{"coragem"}, # conseguido na sala vazia
-                    "opcoes ocultas":{"prefiro pegar DP"}},
+                    "item":"coragem", # conseguido na sala vazia
+                    "opcoes ocultas":{"prefiro pegar DP":"desistir"}},
             
             "Ganiel Duzzo": {
                     "descricao": "o monstro do Design",
@@ -232,7 +232,7 @@ def carregar_personagens(nome):
                         "luta":{"derrota":"Bibliotecaria diz: Você não achou que fosse ganhar de mim, não é?",
                                 "vitoria":"Bibliotecaria diz: Foi pura sorte"}},
                     "status":[100,100,100],
-                    "item":{'carteirinha do guarda'},
+                    "item":"carteirinha do guarda",
                     "opcoes ocultas":{'escadas':'vá para as escadas secretas dentro da biblioteca.'}},
             
             "Hagemoto": {
@@ -247,7 +247,7 @@ def carregar_personagens(nome):
                         "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
                                 "vitoria":"texto de vitória"}},
                     "status":[300,100,100],
-                    "item":{"canudos"},
+                    "item":"canudos",
                     "opcoes ocultas":{"sala vazia":"ser teletransportado para a biblioteca"}},
             
             "veterano enfurecido":{
@@ -261,7 +261,7 @@ def carregar_personagens(nome):
                         "luta":{"derrota":"Vetaro diz: você já era, panaca!",
                                 "vitoria":"E-e-e-eu não quis insinuar que-e Eeeargh!"}},
                     "status":[100,100,100],
-                    "item":{"notebook de algum bolsista"},
+                    "item":"notebook de algum bolsista",
                     "opcoes ocultas":{"conversar":"tentar conversar com ele"}}}
             
     return personagens
@@ -354,7 +354,7 @@ def carregar_luta(characters,inimigo, player,):
 # Função que define os itens presentes nos cenários
 def carregar_inventario(lugar):
     cenas = {
-                "guarda":"carterinha do guarda",
+                "guarda":"carteirinha do guarda",
                 "escadas":"Think Python",
                 "Hagemoto":"carteirinha de Marcos da Costa",
                 "setimo andar": "extintor de incendio",
