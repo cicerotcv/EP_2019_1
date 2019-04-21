@@ -22,8 +22,10 @@ def instrucoes():
     lista = [
         "Instruções:",
         "1) Se você não quiser ser eliminado instantaneamente, digite exatamente como sugerem as sugestões",
-        "2) Se quiser desistir do jogo, pode digitar 'prefiro pegar DP' a qualquer momento.\n"
-        "3) As instruções 1 e 2 são muito importantes"]
+        "2) Se quiser desistir do jogo, pode digitar 'prefiro pegar DP' a qualquer momento.",
+        "3) As instruções 1 e 2 são muito importantes",
+        "4) O jogo possui uma cheat de vida que pode ser usada a qualquer momento.",
+        "5) A cheat mencionada acima é: 'essa EP merece A+ mesmo sem ter todas as features implementadas'."]
     for i in lista:
         print(i)
 
@@ -36,25 +38,32 @@ def carregar_cenarios(nome):
             "opcoes": {
                 "setimo andar": "Tomar o elevador para o andar do professor",
                 "biblioteca": "Ir para a biblioteca",
-                "guarda": "Seu Brian"
-            }
-        },
+                "guarda": "Seu Brian",
+                "investigar": "Busque no cenário se há alguma coisa"},
+            "item":"carterinha do guarda",
+            "opcoes ocultas":{"Porta para Escadas":"Somente pessoas autorizadas podem entrar aqui"}},
+        
         "setimo andar": {
             "titulo": "Andar do desespero",
             "descricao": "Voce chegou ao andar da sala do seu professor",
             "opcoes": {
                 "inicio": "Tomar o elevador para o saguao de entrada",
-                "professor": "Falar com o professor"
-            }
+                "professor": "Falar com o professor",
+                "investigar": "Busque no cenário se há alguma coisa"},
+            "item":"carterinha de Marcos da Costa",
+            "opcoes ocultas":{},
         },
+        
         "biblioteca": {
             "titulo": "Caverna da tranquilidade",
             "descricao": "Voce esta na biblioteca",
             "opcoes": {
-                "inicio": "Voltar para o saguao de entrada"
+                "inicio": "Voltar para o saguao de entrada",
+                "investigar": "Busque no cenário se há alguma coisa"},
+            "item":{"Think Python"},
+            "opcoes ocultas":{"Outra dimensão":"Você se senta para ler o livro Think Python e acaba dormindo"}
             }
         }
-    }
     nome_cenario_atual = "inicio"
     return cenarios, nome_cenario_atual
 
@@ -67,31 +76,37 @@ def carregar_personagens(nome):
                     "opcoes": {
                             "combate":"lutar com o Brian.",
                             "conversar": "conversar com o Brian.",
-                            "voltar":"voltar para o saguão."}, # ainda não foi implementado
+                            "voltar":"voltar para o saguão."}, 
                     "imortal": False,
+                    "derrotado": False,
                     "speech": {
                         "conversar":"Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
                                     "algum aluno está dormindo na biblioteca.",
                         "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
-                                "vitoria":"Brian diz: '''Nunca tive chance. Não era nem uma batalha. "+
-                                    "Tanto por profecias. Você é muito forte... {}...'''".format(nome),
-                                "imortal":"você foi obliterado"}},
-                    "status":[100,100,100]}, # [vida,ataque,defesa]
+                                "vitoria":"Brian diz: Parece que eu nunca tive chance de te vencer... aarrrhgh!",
+                                "imortal":"Você foi obliterado",
+                                "derrotado":"O guarda já foi derrotado."}},
+                    "status":[100,100,100], # [vida,ataque,defesa]
+                    "item":{"Pizza no iFood"},
+                    "opcoes ocultas":{"Alimentar":"Dar pizza ao guarda"}},
             
             "professor": {
                     "descricao": "o monstro do Python",
-                    "saudacao": "Voce foi pedir para o professor adiar o EP."
-                             "O professor revelou que é um monstro disfarçado "
-                             "e devorou sua alma.",
+                    "saudacao": "",
                     "opcoes": {"combate":"tente a sorte"},
                     "imortal":False,
+                    "derrotado": False,
                     "speech": {
                         "conversar":"Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
                                     "algum aluno está dormindo na biblioteca.",
                         "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
-                                "vitoria":"Brian diz: Nunca tive chance. Não era nem uma batalha. "+
-                                    "Tanto por profecias. Você é muito forte... Saitama..."}},
-                    "status":[]},
+                                "vitoria":"texto de vitória",
+                                 "":"Voce foi pedir para o professor adiar o EP. "+
+                                    "O professor revelou que é um monstro disfarçado "+
+                                    "e devorou sua alma."}},
+                    "status":[100,100,100],
+                    "item":{},
+                    "opcoes ocultas":{}},
             
             "Ganiel Duzzo": {
                     "descricao": "o monstro do Python",
@@ -104,10 +119,10 @@ def carregar_personagens(nome):
                         "conversar":"Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
                                     "algum aluno está dormindo na biblioteca.",
                         "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
-                                "vitoria":"Brian diz: Nunca tive chance. Não era nem uma batalha. "+
-                                    "Tanto por profecias. Você é muito forte... Saitama..."}},
-                    "status":[]},
-
+                                "vitoria":"Brian diz: texto de vitória"}},
+                    "status":[],
+                    "item":{},
+                    "opcoes ocultas":{}},
             "Bibliotecaria": {
                     "descricao": "o monstro do Python",
                     "saudacao": "Voce foi pedir para o professor adiar o EP."
@@ -119,10 +134,10 @@ def carregar_personagens(nome):
                         "conversar":"Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
                                     "algum aluno está dormindo na biblioteca.",
                         "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
-                                "vitoria":"Brian diz: Nunca tive chance. Não era nem uma batalha. "+
-                                    "Tanto por profecias. Você é muito forte... Saitama..."}},
-                    "status":[]},
-        
+                                "vitoria":"texto de vitória"}},
+                    "status":[],
+                    "item":{},
+                    "opcoes ocultas":{}},
             "Hagemoto": {
                     "descricao": "o monstro do Python",
                     "saudacao": "Voce foi pedir para o professor adiar o EP."
@@ -134,10 +149,10 @@ def carregar_personagens(nome):
                         "conversar":"Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
                                     "algum aluno está dormindo na biblioteca.",
                         "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
-                                "vitoria":"Brian diz: Nunca tive chance. Não era nem uma batalha. "+
-                                    "Tanto por profecias. Você é muito forte... Saitama..."}},
-                    "status":[]},
-        
+                                "vitoria":"texto de vitória"}},
+                    "status":[],
+                    "item":{},
+                    "opcoes ocultas":{}},
             "Aluno dormindo no chão":{
                     "descricao": "o monstro do Python",
                     "saudacao": "Voce foi pedir para o professor adiar o EP."
@@ -149,8 +164,7 @@ def carregar_personagens(nome):
                         "conversar":"Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
                                     "algum aluno está dormindo na biblioteca.",
                         "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
-                                "vitoria":"Brian diz: Nunca tive chance. Não era nem uma batalha. "+
-                                    "Tanto por profecias. Você é muito forte... Saitama..."}},
+                                "vitoria":"texto de vitória"}},
                     "status":[]}}
             
     return personagens
@@ -167,7 +181,9 @@ def carregar_luta(characters,inimigo, player,):
     if enemy["imortal"] == True:
         game_over = True
         text = enemy["speech"]["luta"]["imortal"]
-    
+    elif enemy["derrotado"] == True:
+        game_over = False
+        text = enemy["speech"]["luta"]["derrotado"]
     else:
         battle = True 
         battle_ini = ["\nEis que se inicia a batalha", "\nComeçou!", "\nPrepare-se!", "\nSe inicia um dos maiores duelos de todos os tempos"]
@@ -189,7 +205,7 @@ def carregar_luta(characters,inimigo, player,):
                 if enemy_status[0] < 0:
                     enemy_status[0] = 0
                     battle = False
-                    text = "\nSeu adversário acabou interrompendo a luta."
+                    text = enemy["speech"]["luta"]["vitoria"]
                 print("\n{0} recebe {1} de dano. Vida atual:{2} pontos de vida.".format(inimigo, player_damage, enemy_status[0]))
                 if not battle:
                     break
@@ -204,7 +220,7 @@ def carregar_luta(characters,inimigo, player,):
                     player[0] = 0
                     battle = False
                     game_over = True
-                    text = "\nVocê foi obliterado. Então..."
+                    text = enemy["speech"]["luta"]["derrota"]
                 print("\nVocê recebe {0} de dano. Vida atual: {1} pontos de vida.".format(enemy_damage,player[0]))
 
 
@@ -219,7 +235,7 @@ def carregar_luta(characters,inimigo, player,):
                 if enemy_status[0] < 0:
                     enemy_status[0] = 0
                     battle = False
-                    text = "\nSeu adversário acabou interrompendo a luta"
+                    text = enemy["speech"]["luta"]["vitoria"]
                 print("\n{0} recebe {1} de dano. Vida atual:{2} pontos de vida.".format(inimigo,player_damage,enemy_status[0]))
                 if not battle:
                     break
@@ -234,13 +250,23 @@ def carregar_luta(characters,inimigo, player,):
                     player[0] = 0
                     battle = False
                     game_over = True
-                    text = "Você foi obliterado. Então..."
+                    text = enemy["speech"]["luta"]["derrota"]
                 print("\nVocê recebe {0} de dano. Vida atual: {1} pontos de vida.".format(enemy_damage,player[0]))
 
 
 
     return text, game_over
 
+def carregar_inventario(lugar):
+    cenas = {
+                "guarda":"carterinha do guarda",
+                "biblioteca": "iPhone XII",
+                "setimo andar": "carterinha de Marcos da Costa"}
+    if lugar in cenas:
+       return True,cenas[lugar],
+    else:
+       return False, None
+    
 #Função Principal
 def main():
     
@@ -273,58 +299,89 @@ def main():
     print()
 
     #Loading
+
     player_status = [100,100,100] #Características do personagem [hp,atk,def]
     cenarios, condicao = carregar_cenarios(name) # dicionarios
     personagens = carregar_personagens(name) # valor de dicionario
+    bolsa = []
     game_over = False
     start = condicao
 
     #Rodada do Jogo
     while not game_over:
         #Loading Inicial
+        
         cena = start
         if cena in cenarios:
             cenario_atual = cenarios[cena]
             titulo = cenario_atual["titulo"]
             descricao = cenario_atual["descricao"]
             opcoes = cenario_atual['opcoes']
+            opcoes_ocultas = cenario_atual['opcoes ocultas']
             voltar = cena
+            tipo = cenarios
         elif cena in personagens:
             cenario_atual = cena
             titulo = personagens[cena]["descricao"]
             descricao = "Você está falando com {0}".format(titulo)
             opcoes = personagens[cena]['opcoes']
+            opcoes_ocultas = personagens[cena]['opcoes ocultas']
             personagem = cena
-            
+            tipo = personagens
         print("{0}\n{1}\n{2}\n".format(titulo,"-"*len(titulo),descricao))
         
         if len(opcoes) == 0:
             print("Acabaram-se suas opções! Mwo mwo mwooooo...")
             game_over = True
         else:
-            print('O que você vai fazer?')
-            print()
-            for opcao in opcoes:
-                print('{0}: {1}'.format(opcao,opcoes[opcao]))
-            
-            
+            print('O que você vai fazer?\n')
+            if tipo[cena]['item'] in bolsa:
+                for opcao in opcoes:
+                    print('{0}: {1}'.format(opcao,opcoes[opcao]))
+                for opcao_oculta in opcoes_ocultas:
+                    print('{0}: {1}'.format(opcao_oculta,opcoes_ocultas[opcao_oculta]))
+            else:
+                for opcao in opcoes:
+                    print('{0}: {1}'.format(opcao,opcoes[opcao]))
             start = input(">>>>> ")  # palavra mágica do jogo
-            
-            
+
             if start == "prefiro pegar DP": 
                 break
-
-            elif start in personagens:
+            
+            if start == "essa EP merece A+ mesmo sem ter todas as features implementadas":
+                player_status[0] = 200
+                start = cena
+            
+            if start in personagens:
                 print(personagens[start]["saudacao"])
+            
             elif start == "voltar":
                 start = voltar
-                
+            
             elif start == 'combate':
                 resposta,game_over = carregar_luta(personagens,personagem,player_status)
                 print(resposta)
                 if not game_over:  # jogador volta ao início
+                    personagens[personagem]["derrotado"] = True
+                    #cenarios[cena]["opcoes"][personagem] = "{} está inconsciente.".format(personagem)
                     start = voltar
-                    personagens[personagem] 
+            
+            elif start == "investigar":
+                verifica,item = carregar_inventario(cena)
+                if verifica == True:
+                    bolsa.append(item)
+                    print("----------------------------------")
+                    print("Parabéns! \n")
+                    print("Você acaba de ganhar o item {0}\n {0} está agora guardada na sua bolsa".format(item))
+                    verifica = False
+                    input("Aperte enter para voltar para o(a) {0}".format(voltar))
+                    start = voltar
+                else:
+                    print("----------------------------------")
+                    print("não há nada para encontrar")
+                    input("Aperte enter para voltar para o(a) {0}".format(voltar))
+                    start = voltar
+            
             elif start in cenarios:
                 cena = start
             else:
@@ -332,7 +389,6 @@ def main():
                 game_over = True
 
     print("Você morreu!")
-
 
 # Programa principal.
 if __name__ == "__main__":
