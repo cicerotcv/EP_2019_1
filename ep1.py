@@ -38,7 +38,7 @@ def carregar_cenarios(nome):
         "inicio": {
             "titulo": "Saguao do perigo",
             "descricao": "Voce esta no saguao de entrada do insper\n"+
-                        "Por algum motivo, os elevadores só podem te levar para o setimo andar",
+                        "Os elevadores estão em chamas.",
             "opcoes": {
                 "setimo andar": "Tomar o elevador para o andar do professor",
                 "biblioteca": "Ir para a biblioteca",
@@ -95,7 +95,7 @@ def carregar_cenarios(nome):
                 "investigar": "digite 'investigar' e receba sua merecida recompensa."},
             "item":"clipes metalicos",
             # item disponivel: EP feita
-            "opcoes ocultas":{"porta estranha":"você nota um orifício triangular"}
+            "opcoes ocultas":{"professor":"viaje diretamente até o professor e entregue a EP."}
         },
             
         "refeitorio": {
@@ -123,7 +123,7 @@ def carregar_cenarios(nome):
             "opcoes ocultas":{"refeitorio":"vá para o refeitório usando o elevador."}
         },
 
-        "sala secreta":{
+        "Teletransporte":{
             "titulo": "Sala secreta de Marcos da Costa",
             "descricao": "Você vê uma mesa com várias palitos de picolé em cima.",
             "opcoes": {
@@ -185,7 +185,7 @@ def carregar_personagens(nome):
                                 "derrotado":"O guarda já foi derrotado."}},
                     "status":[100,100,100], # [vida,ataque,defesa]
                     "item":"pizza do InsperFoods",
-                    "opcoes ocultas":{"sala de estudos":"dê pizza ao guarda para acessar"}},
+                    "opcoes ocultas":{"sala secreta":"dê pizza ao guarda para acessar"}},
             
             "professor": {
                     "descricao": "O monstro do Python",
@@ -201,8 +201,9 @@ def carregar_personagens(nome):
                                 "vitoria":"Como eu poderia ter sido esmagado \npor alguém como você??? Aerrrgh!".format(nome),
                                  }},
                     "status":[500,100,100],
-                    "item":"coragem", # conseguido na sala vazia
-                    "opcoes ocultas":{"prefiro pegar DP":"desistir"}},
+                    "item":"EP feita", # conseguido na sala vazia
+                    "opcoes ocultas":{"Entregar EP":"Entregue a EP e ganhe o jogo.",
+                                "Prefiro pegar DP":"Pegue DP e morra."}},
             
             "Ganiel Duzzo": {
                     "descricao": "o monstro do Design",
@@ -242,10 +243,12 @@ def carregar_personagens(nome):
                     "imortal":False,
                     "derrotado":False,
                     "speech": {
-                        "conversar":"Olá, {0}, adoraria conversar, mas tenho que ver se ".format(nome)+ 
-                                    "algum aluno está dormindo na biblioteca.",
-                        "luta":{"derrota":"Brian diz: Você não achou que fosse ganhar de mim, não é?",
-                                "vitoria":"texto de vitória"}},
+                        "conversar":"Olá, {0}, adoraria conversar, mas preciso modelar as relações".format(nome)+ 
+                                    "presentes entre os fenômenos do universo",
+                        "luta":{"derrota":"Hagemoto diz: você achou que poderia vencer uma\n"+
+                                            "criatura transcendental como eu?",
+                                "vitoria":"Hagemoto diz: Você me parece digno de receber minha pedra do teletransporte...\n"+
+                                            "Saiba que em um dos futuros possíveis você consegue entregar o EP."}},
                     "status":[300,100,100],
                     "item":"canudos",
                     "opcoes ocultas":{"sala vazia":"ser teletransportado para a biblioteca"}},
@@ -356,10 +359,10 @@ def carregar_inventario(lugar):
     cenas = {
                 "guarda":"carteirinha do guarda",
                 "escadas":"Think Python",
-                "Hagemoto":"carteirinha de Marcos da Costa",
+                "Hagemoto":"joia do espaco",
                 "setimo andar": "extintor de incendio",
                 "refeitorio": "pizza do InsperFoods",
-                "outra dimensao":"joia do espaco",
+                "outra dimensao":"carteirinha de ",
                 "Ganiel Duzzo":"chave triangular",
                 "sala de estudos":"notebook de algum bolsista",
                 "biblioteca": "iPhone XII",
@@ -424,6 +427,7 @@ def main():
         itens_personagens[i] = carregar_inventario(i)[1]
     
     game_over = False
+    churrasco = False
     EP_feita = False
     #Rodada do Jogo
     while not game_over:
@@ -463,15 +467,30 @@ def main():
                     print('{0}: {1}'.format(opcao,opcoes[opcao]))
             start = input(">>>>> ")  # palavra mágica do jogo
             # Entregar EP:
-            if start == "Entregar EP" and "Ep feita" in bolsa:
+            if start == "Entregar EP" and "EP feita" in bolsa:
                 EP_feita = True
                 game_over = True
                 break            
-            
-            if start == "churrasco" or start == "prefiro pegar DP":
-                print("\033[31mVocê foi obliterado \033[0;0m")
+            # churrasco
+            if start == "churrasco":
+                churrasco = True
                 break
+            # Prefiro pegar DP
+            if start == "Prefiro pegar DP":
+                DP = True
+                break
+            # Cheats:
             
+            ## Obter todos os itens:
+            if start == "This is Sparta":
+                for i in itens_personagens:
+                    if itens_personagens[i] != None:
+                        bolsa.append(itens_personagens[i])
+                for i in itens_cenarios:
+                    if itens_cenarios[i] != None:
+                        bolsa.append(itens_cenarios[i])
+                start = cena
+            ## Mais 500 de vida:
             if start == "ReadyPlayerOne":
                 print("+ 500 de vida")
                 player_status[0] += 500
@@ -541,8 +560,17 @@ def main():
                 game_over = True
     if EP_feita:
         print('Parabéns, você conseguiu quebrar a maldição e vencer o jogo!')
+        print('-\n-\nVocê acorda e percebe que... \n-\n-')
+        print("É o dia de entregar o EP e você está muuuuito atrasado! Você está "
+        "na entrada do Insper e quer procurar o professor para pedir um "
+        "adiamento do EP (boa sorte...)")
+        
     elif personagens["professor"]["derrotado"]:
         print("Parabéns! Você venceu o jogo derrotando o professor.")
+    elif churrasco == True:
+        print("Parabéns! Você se churrascou e morreu.")
+    elif DP:
+        print("Parabéns! Você pegou DP e morreu.")
     else:
         print("Você perdeu")
 
