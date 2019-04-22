@@ -123,7 +123,7 @@ def carregar_cenarios(nome):
             "opcoes ocultas":{"refeitorio":"vá para o refeitório usando o elevador."}
         },
 
-        "Teletransporte":{
+        "sala secreta":{
             "titulo": "Sala secreta de Marcos da Costa",
             "descricao": "Você vê uma mesa com várias palitos de picolé em cima.",
             "opcoes": {
@@ -427,6 +427,7 @@ def main():
         itens_personagens[i] = carregar_inventario(i)[1]
     
     game_over = False
+    DP = False
     churrasco = False
     EP_feita = False
     #Rodada do Jogo
@@ -541,11 +542,18 @@ def main():
                     if cena in itens_cenarios:
                         del itens_cenarios[cena]
                         del cenarios[cena]["opcoes"]["investigar"]
+                    if cena in itens_personagens:
+                        del itens_cenarios[cena]
+                        del cenarios[cena]["opcoes"]["investigar"]
+                        
                     input("Pressione enter para voltar.\n")
                     start = voltar
                 else:
                     print("--------------------------")
                     print("não há nada aqui")
+                    if cena in itens_cenarios:
+                        del itens_cenarios[cena]
+                        del cenarios[cena]["opcoes"]["investigar"]
                     input("Aperte enter para voltar.\n")
                     start = voltar
             # conversar:
