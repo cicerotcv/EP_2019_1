@@ -5,7 +5,6 @@
 # - aluno A: Cicero Tiago Carneiro Valentim, cicerotcv@al.insper.edu.br
 # - aluno B: Luiz Felipe Lazzaron, luizfl@al.insper.edu.br
 from random import randint
-
 name = input("\nOlá, visitante! Qual seu nome? \n>>>>> ")
 
 def creditos(entrada):
@@ -253,7 +252,7 @@ def carregar_personagens(nome):
                     "item":"canudos",
                     "opcoes ocultas":{"sala vazia":"ser teletransportado para a biblioteca"}},
             
-            "veterano enfurecido":{
+            "Estudante Aleatorio de Engenharia da USP":{
                     "descricao": "Ele te acusa de ter roubado o notebook dele.",
                     "saudacao": "E aí, suco de fruta, quero meu notebook de volta!",
                     "opcoes": {"combate":"mostrar quem é que manda"},
@@ -266,20 +265,19 @@ def carregar_personagens(nome):
                     "status":[100,100,100],
                     "item":"notebook de algum bolsista",
                     "opcoes ocultas":{"conversar":"tentar conversar com ele"}},
-            "Estudante Aleatorio de Engenharia da USP":{
-                    "descricao": "Estudante Aleatório de Engenharia da USP",
-                    "saudacao": "Eai aluno do Inspî! Ainda não sabe integrar? hahaha Renda-se agora ou prepare-se para lutar!",
-                    "opcoes": {"combate":"Mostrar que já sabe Python, Equações a Diferenças e Empreender",
-                               "conversar": "tentar convencer a não lutar"},
+                            "veterano enfurecido":{
+                    "descricao": "Ele te acusa de ter roubado o notebook dele.",
+                    "saudacao": "E aí, suco de fruta, quero meu notebook de volta!",
+                    "opcoes": {"combate":"mostrar quem é que manda"},
                     "imortal":False,
                     "derrotado": False,
                     "speech": {
-                        "conversar":"Cadê Cálculo na sua grade curricular? Eu quero batalhar!",
-                        "luta":{"derrota":"Nos vemos no mercado de trabalho, aluno Inspî!",
-                                "vitoria":"Aonde está a sua engenharia diferente?? ha ha ha "}},
+                        "conversar":"Não quero conversar!",
+                        "luta":{"derrota":"hahaha engenharia diferente hahaha ",
+                                "vitoria":"Nos vemos no mercado de trabalho, insperiano"}},
                     "status":[100,100,100],
-                    "item":"Prova Antiga de Design de Software",
-                    "opcoes ocultas":{}}}
+                    "item":"Prova de Design de Software Antiga",
+                    "opcoes ocultas":{"conversar":"tentar conversar com ele"}}}
             
     return personagens
 
@@ -373,11 +371,11 @@ def carregar_inventario(lugar):
     cenas = {
                 "guarda":"carteirinha do guarda",
                 "escadas":"Think Python",
-                "Hagemoto":"joia do espaco",
+                "Hagemoto":"chave triangular",
                 "setimo andar": "extintor de incendio",
                 "refeitorio": "pizza do InsperFoods",
                 "outra dimensao":"carteirinha de ",
-                "Ganiel Duzzo":"chave triangular",
+                "Ganiel Duzzo":"joia do espaco",
                 "sala de estudos":"notebook de algum bolsista",
                 "biblioteca": "iPhone XII",
                 "veterano enfurecido":"pedacos de papel",
@@ -385,7 +383,7 @@ def carregar_inventario(lugar):
                 "sala vazia":"canudos",
                 "bibliotecaria":"clipes metalicos",
                 "sala secreta":"palitos de picole",
-                "Estudante Aleatorio de Engenharia da USP":"Prova Antiga de Design de Software"}
+                "Estudante Aleatorio de Engenharia da USP":"Prova de Design de Software Antiga Gabaritada"}
     if lugar in cenas:
        return True,cenas[lugar],
     else:
@@ -447,7 +445,7 @@ def main():
     EP_feita = False
     #Rodada do Jogo
     while not game_over:
-
+        n = randint(0,101)
         cena = start
         if cena in cenarios:
             cenario_atual = cenarios[cena] # valor de dicionario
@@ -483,6 +481,20 @@ def main():
                     print('{0}: {1}'.format(opcao,opcoes[opcao]))
             start = input(">>>>> ")  # palavra mágica do jogo
             
+            #FEATURE PARA COMBATES ALEATÓRIOS
+            if n>60:
+                if not personagens["Estudante Aleatorio de Engenharia da USP"]["derrotado"] == True: 
+                    start = "Estudante Aleatorio de Engenharia da USP"
+                    print("---------------------------------")
+                    print("Um personagem aleatório apareceu!")
+                    print("---------------------------------")
+                    print("Você acaba de encontrar "+start)
+                    print("Aluno da USP: Como assim não sabe Cálculo? Renda-se agora ou prepare-se para lutar!")
+                    x = input ("Para usar Python e Equações a Diferenças, tecle enter")
+                    personagem = "Estudante Aleatorio de Engenharia da USP"
+                    cena = personagem 
+                    start = "combate"
+                    
             # Entregar EP:
             if start == "Entregar EP" and "EP feita" in bolsa:
                 EP_feita = True
@@ -519,7 +531,7 @@ def main():
             # voltar
             elif start == "voltar":
                 start = voltar
-
+            
             # abrir mochila
             elif start == "mochila":
                 if len(bolsa) != 0:
@@ -529,7 +541,7 @@ def main():
                 else:
                     print("\n{0}\n>> sua mochila está vazia <<\n{0}".format(28*'-'))
                 start = voltar
-                      
+            
             # iniciar combate
             elif start == 'combate':
                 resposta,game_over = carregar_luta(personagens,personagem,player_status)
@@ -579,25 +591,12 @@ def main():
                 
             elif start in cenarios:
                 cena = start
-
-"""            
-            #Monstro Aleatório
-            n = randint(1,10) 
-            if n >5:
-                if not personagens["Estudante Aleatorio de Engenharia da USP"]["derrotado"]:
-                    start = "Estudante Aleatorio de Engenharia da USP"
-        
-            if personagens[cena]["saudacao"] in personagem:
-            print(personagens[cena]["saudacao"])
-                
             else:
                 print("Sua indecisão foi sua ruína!")
                 game_over = True
-"""
-
     if EP_feita:
         print('Parabéns, você conseguiu quebrar a maldição e vencer o jogo!')
-        print('-\n-\nVocê acorda e percebe que... \n-\n-')
+        print('-\n-\n\033[31mVocê acorda e percebe que...\033[0;0m \n-\n-')
         print("É o dia de entregar o EP e você está muuuuito atrasado! Você está "
         "na entrada do Insper e quer procurar o professor para pedir um "
         "adiamento do EP (boa sorte...)")
