@@ -265,7 +265,21 @@ def carregar_personagens(nome):
                                 "vitoria":"E-e-e-eu não quis insinuar que-e Eeeargh!"}},
                     "status":[100,100,100],
                     "item":"notebook de algum bolsista",
-                    "opcoes ocultas":{"conversar":"tentar conversar com ele"}}}
+                    "opcoes ocultas":{"conversar":"tentar conversar com ele"}},
+            "Estudante Aleatorio de Engenharia da USP":{
+                    "descricao": "Estudante Aleatório de Engenharia da USP",
+                    "saudacao": "Eai aluno do Inspî! Ainda não sabe integrar? hahaha Renda-se agora ou prepare-se para lutar!",
+                    "opcoes": {"combate":"Mostrar que já sabe Python, Equações a Diferenças e Empreender",
+                               "conversar": "tentar convencer a não lutar"},
+                    "imortal":False,
+                    "derrotado": False,
+                    "speech": {
+                        "conversar":"Cadê Cálculo na sua grade curricular? Eu quero batalhar!",
+                        "luta":{"derrota":"Nos vemos no mercado de trabalho, aluno Inspî!",
+                                "vitoria":"Aonde está a sua engenharia diferente?? ha ha ha "}},
+                    "status":[100,100,100],
+                    "item":"Prova Antiga de Design de Software",
+                    "opcoes ocultas":{}}}
             
     return personagens
 
@@ -370,7 +384,8 @@ def carregar_inventario(lugar):
                 "porta estranha":"EP feita",
                 "sala vazia":"canudos",
                 "bibliotecaria":"clipes metalicos",
-                "sala secreta":"palitos de picole"}
+                "sala secreta":"palitos de picole",
+                "Estudante Aleatorio de Engenharia da USP":"Prova Antiga de Design de Software"}
     if lugar in cenas:
        return True,cenas[lugar],
     else:
@@ -432,7 +447,7 @@ def main():
     EP_feita = False
     #Rodada do Jogo
     while not game_over:
-        
+
         cena = start
         if cena in cenarios:
             cenario_atual = cenarios[cena] # valor de dicionario
@@ -467,6 +482,7 @@ def main():
                 for opcao in opcoes:
                     print('{0}: {1}'.format(opcao,opcoes[opcao]))
             start = input(">>>>> ")  # palavra mágica do jogo
+            
             # Entregar EP:
             if start == "Entregar EP" and "EP feita" in bolsa:
                 EP_feita = True
@@ -503,7 +519,7 @@ def main():
             # voltar
             elif start == "voltar":
                 start = voltar
-            
+
             # abrir mochila
             elif start == "mochila":
                 if len(bolsa) != 0:
@@ -513,7 +529,7 @@ def main():
                 else:
                     print("\n{0}\n>> sua mochila está vazia <<\n{0}".format(28*'-'))
                 start = voltar
-            
+                      
             # iniciar combate
             elif start == 'combate':
                 resposta,game_over = carregar_luta(personagens,personagem,player_status)
@@ -563,9 +579,22 @@ def main():
                 
             elif start in cenarios:
                 cena = start
+
+"""            
+            #Monstro Aleatório
+            n = randint(1,10) 
+            if n >5:
+                if not personagens["Estudante Aleatorio de Engenharia da USP"]["derrotado"]:
+                    start = "Estudante Aleatorio de Engenharia da USP"
+        
+            if personagens[cena]["saudacao"] in personagem:
+            print(personagens[cena]["saudacao"])
+                
             else:
                 print("Sua indecisão foi sua ruína!")
                 game_over = True
+"""
+
     if EP_feita:
         print('Parabéns, você conseguiu quebrar a maldição e vencer o jogo!')
         print('-\n-\nVocê acorda e percebe que... \n-\n-')
